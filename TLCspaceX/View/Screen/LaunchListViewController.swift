@@ -5,11 +5,11 @@
 
 import UIKit
 
-class LaunchesListViewController: UIViewController {
+class LaunchListViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
     }
 
 

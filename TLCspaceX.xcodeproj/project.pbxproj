@@ -16,6 +16,7 @@
 		82A71C112865F61600919977 /* TLCspaceXTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A71C102865F61600919977 /* TLCspaceXTests.swift */; };
 		82A71C1B2865F61600919977 /* TLCspaceXUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A71C1A2865F61600919977 /* TLCspaceXUITests.swift */; };
 		82A71C1D2865F61600919977 /* TLCspaceXUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A71C1C2865F61600919977 /* TLCspaceXUITestsLaunchTests.swift */; };
+		82A71C32286610D400919977 /* Launch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A71C31286610D400919977 /* Launch.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,6 +50,7 @@
 		82A71C162865F61600919977 /* TLCspaceXUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TLCspaceXUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		82A71C1A2865F61600919977 /* TLCspaceXUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TLCspaceXUITests.swift; sourceTree = "<group>"; };
 		82A71C1C2865F61600919977 /* TLCspaceXUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TLCspaceXUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		82A71C31286610D400919977 /* Launch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Launch.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -179,6 +181,7 @@
 		82A71C2F2865FB6D00919977 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				82A71C31286610D400919977 /* Launch.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -324,6 +327,7 @@
 			files = (
 				82A71BFE2865F61500919977 /* LaunchListViewController.swift in Sources */,
 				82A71BFA2865F61500919977 /* AppDelegate.swift in Sources */,
+				82A71C32286610D400919977 /* Launch.swift in Sources */,
 				82A71BFC2865F61500919977 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

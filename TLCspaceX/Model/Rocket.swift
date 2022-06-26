@@ -8,4 +8,5 @@ import Foundation
 struct Rocket: Codable {
     let id: String
     let name: String
+    let wikipedia: String
 }

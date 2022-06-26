@@ -15,10 +15,11 @@ enum Network {
 
 /// Constant values representing titles on the pages in the app
 enum Title {
-    static let launchList = "SpaceX Launches List"
-    static let launchAlert = "SpaceX Launch"
-    static let getRocket = "Get Rocket"
-    static let rocketAlert = "Rocket"
+    static let launchList    = "SpaceX Launches List"
+    static let launchAlert   = "SpaceX Launch"
+    static let getRocket     = "Get Rocket"
+    static let getRocketWiki = "Rocket Wiki"
+    static let rocketAlert   = "Rocket"
 }
 
 /// Constant values to be used for animations

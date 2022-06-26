@@ -13,4 +13,5 @@ enum TLCError: String, Error {
     case unableToComplete = "Unable to complete your request. Please check your network connection and try again."
     case unableToDecode   = "Unable to decode the data. Please check if you're decoding your data correctly."
     case invalidStaticUrl = "Invalid static URL string: %@"
+    case wikiError        = "Unable to read data from rocket. Please try again."
 }

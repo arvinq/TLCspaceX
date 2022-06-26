@@ -4,6 +4,7 @@
 	
 
 import UIKit
+import SafariServices
 
 extension UIViewController {
     
@@ -20,18 +21,28 @@ extension UIViewController {
         DispatchQueue.main.async {
             let alertController = UIAlertController(title: alertTitle, message: message, preferredStyle: .alert)
             
+            var cancelTitle: String = AlertButton.okay
+            
             if let completion = completion {
                 let okAction = UIAlertAction(title: AlertButton.okay, style: .default) { action in
                     completion()
                 }
+                
+                cancelTitle = AlertButton.cancel
                 alertController.addAction(okAction)
             }
             
-            let cancelAction = UIAlertAction(title: AlertButton.cancel, style: .cancel)
+            let cancelAction = UIAlertAction(title: cancelTitle, style: .cancel)
             alertController.addAction(cancelAction)
     
             self.present(alertController, animated: true)
         }
+    }
+    
+    func showSafariWebView(on url: URL) {
+        let safariWebView = SFSafariViewController(url: url)
+        safariWebView.preferredControlTintColor = .systemGray
+        present(safariWebView, animated: true)
     }
 }
 

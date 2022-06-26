@@ -20,6 +20,12 @@ class RocketInfoViewController: UIViewController {
         return activityIndicator
     }()
     
+    lazy var rocketWikiButton: TLCButton = {
+        let button = TLCButton(title: Title.getRocketWiki, backgroundColor: .systemGray)
+        button.addTarget(self, action: #selector(rocketWikiButtonTapped), for: .touchUpInside)
+        return button
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
@@ -37,12 +43,18 @@ class RocketInfoViewController: UIViewController {
         view.backgroundColor = .systemBackground
         
         view.addSubview(activityIndicator)
+        view.addSubview(rocketWikiButton)
     }
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([
             activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            
+            rocketWikiButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            rocketWikiButton.heightAnchor.constraint(equalToConstant: Size.buttonHeight),
+            rocketWikiButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            rocketWikiButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5)
         ])
     }
     
@@ -91,5 +103,16 @@ class RocketInfoViewController: UIViewController {
         guard let rocketId = rocketId else { return }
         viewModelManager.getOneRocket(for: rocketId)
 
+    }
+    
+    @objc
+    private func rocketWikiButtonTapped() {
+        guard let rocketInfoViewModel = rocketInfoViewModel,
+              let wikipediaURL = URL(string: rocketInfoViewModel.wikipedia) else {
+            presentAlert(withTitle: Title.getRocketWiki, andMessage: TLCError.wikiError.rawValue, completion: nil)
+            return
+        }
+        
+        showSafariWebView(on: wikipediaURL)
     }
 }

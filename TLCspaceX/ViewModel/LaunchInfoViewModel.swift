@@ -5,10 +5,14 @@
 
 import Foundation
 
-struct LaunchViewModel {
+struct LaunchInfoViewModel {
     let name: String
+    let id: String
+    let rocketId: String
     
     init(launch: Launch) {
         self.name = launch.name
+        self.id = launch.id
+        self.rocketId = launch.rocket
     }
 }

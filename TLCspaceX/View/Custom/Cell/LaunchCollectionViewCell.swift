@@ -24,7 +24,7 @@ class LaunchCollectionViewCell: UICollectionViewCell {
         return view
     }()
     
-    var launchViewModel: LaunchViewModel? {
+    var launchViewModel: LaunchCellViewModel? {
         didSet { bindValues() }
     }
     

@@ -13,18 +13,23 @@ class ViewModelManager {
     var presentAlert: (()->())?
     var reloadCollection: (()->())?
     var animateLoadView: (()->())?
+    var bindLaunchInformation: ((LaunchInfoViewModel?)->())?
     
     // Properties that triggers binding and updates our view
     var alertMessage: String? {
         didSet { self.presentAlert?() }
     }
     
-    var launchViewModels: [LaunchViewModel] = [] {
+    var launchCellViewModels: [LaunchCellViewModel] = [] {
         didSet { self.reloadCollection?() }
     }
     
     var isLoading: Bool = false {
         didSet { self.animateLoadView?() }
+    }
+    
+    var launchInfoViewModel: LaunchInfoViewModel? {
+        didSet { self.bindLaunchInformation?(launchInfoViewModel) }
     }
     
     init(networkManager: NetworkManagerProtocol = NetworkManager()) {
@@ -36,8 +41,8 @@ class ViewModelManager {
      *  - Parameters:
      *      - index: integer passed that represents the location of the launch in the list
      */
-    func getLaunchViewModel(on index: Int) -> LaunchViewModel {
-        return launchViewModels[index]
+    func getLaunchCellViewModel(on index: Int) -> LaunchCellViewModel {
+        return launchCellViewModels[index]
     }
     
     /**
@@ -51,10 +56,25 @@ class ViewModelManager {
             
             switch result {
             case .success(let launches):
-                var launchViewModels = [LaunchViewModel]()
-                launchViewModels.append(contentsOf: launches.map { LaunchViewModel(launch: $0) })
-                self.launchViewModels = launchViewModels // will trigger the reload
+                var launchCellViewModels = [LaunchCellViewModel]()
+                launchCellViewModels.append(contentsOf: launches.map { LaunchCellViewModel(launch: $0) })
+                self.launchCellViewModels = launchCellViewModels // will trigger the reload
                 
+            case .failure(let error):
+                self.alertMessage = error.rawValue
+            }
+        }
+    }
+    
+    func getOneLaunch(for launchId: String) {
+        self.isLoading = true
+        self.networkManager.getLaunchInfo(for: launchId) { [weak self] result in
+            guard let self = self else { return }
+            self.isLoading = false
+            
+            switch result {
+            case .success(let launch):
+                self.launchInfoViewModel = LaunchInfoViewModel(launch: launch)
             case .failure(let error):
                 self.alertMessage = error.rawValue
             }

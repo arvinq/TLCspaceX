@@ -9,12 +9,14 @@ import UIKit
 enum Network {
     static let baseURL = "https://api.spacexdata.com"
     static let launch  = "v4/launches"
+    static let oneLaunch = "v4/launches/%@"
+    static let oneRocket = "v4/rockets/%@"
 }
 
 /// Constant values representing titles on the pages in the app
 enum Title {
     static let launchList = "SpaceX Launches List"
-    static let launcAlert = "SpaceX Launch"
+    static let launchAlert = "SpaceX Launch"
 }
 
 /// Constant values to be used for animations

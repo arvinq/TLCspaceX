@@ -75,7 +75,7 @@ class LaunchListViewController: UIViewController {
             let message = self.viewModelManager.alertMessage ?? ""
             
             DispatchQueue.main.async {
-                self.presentAlert(withTitle: Title.launcAlert, andMessage: message, completion: nil)
+                self.presentAlert(withTitle: Title.launchAlert, andMessage: message, completion: nil)
             }
         }
         
@@ -112,12 +112,12 @@ class LaunchListViewController: UIViewController {
 
 extension LaunchListViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        viewModelManager.launchViewModels.count
+        viewModelManager.launchCellViewModels.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let launchCell = collectionView.dequeueReusableCell(withReuseIdentifier: LaunchCollectionViewCell.reuseId, for: indexPath) as! LaunchCollectionViewCell
-        launchCell.launchViewModel = viewModelManager.getLaunchViewModel(on: indexPath.item)
+        launchCell.launchViewModel = viewModelManager.getLaunchCellViewModel(on: indexPath.item)
         return launchCell
     }
     
@@ -126,5 +126,13 @@ extension LaunchListViewController: UICollectionViewDelegate, UICollectionViewDa
         let cellHeight = collectionView.frame.height * 0.05
         
         return CGSize(width: cellWidth, height: cellHeight)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let launchInfoViewController = LaunchInfoViewController()
+        launchInfoViewController.launchCellViewModel = viewModelManager.getLaunchCellViewModel(on: indexPath.item)
+        
+        let tempNavigationController = UINavigationController(rootViewController: launchInfoViewController)
+        present(tempNavigationController, animated: true)
     }
 }

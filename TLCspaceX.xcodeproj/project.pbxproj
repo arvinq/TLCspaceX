@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		82391A4128682D660026298A /* TLCSeparatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82391A4028682D660026298A /* TLCSeparatorView.swift */; };
 		82A71BFA2865F61500919977 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A71BF92865F61500919977 /* AppDelegate.swift */; };
 		82A71BFC2865F61500919977 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A71BFB2865F61500919977 /* SceneDelegate.swift */; };
 		82A71BFE2865F61500919977 /* LaunchListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A71BFD2865F61500919977 /* LaunchListViewController.swift */; };
@@ -17,6 +18,13 @@
 		82A71C1B2865F61600919977 /* TLCspaceXUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A71C1A2865F61600919977 /* TLCspaceXUITests.swift */; };
 		82A71C1D2865F61600919977 /* TLCspaceXUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A71C1C2865F61600919977 /* TLCspaceXUITestsLaunchTests.swift */; };
 		82A71C32286610D400919977 /* Launch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A71C31286610D400919977 /* Launch.swift */; };
+		82A71C362866150600919977 /* LaunchCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A71C352866150600919977 /* LaunchCollectionViewCell.swift */; };
+		82A71C3828673FD600919977 /* ViewModelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A71C3728673FD600919977 /* ViewModelManager.swift */; };
+		82A71C3A2867401600919977 /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A71C392867401600919977 /* NetworkManager.swift */; };
+		82A71C3C28677A4C00919977 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A71C3B28677A4C00919977 /* Constant.swift */; };
+		82A71C3E286818E000919977 /* TLCError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A71C3D286818E000919977 /* TLCError.swift */; };
+		82A71C4028681C2700919977 /* LaunchViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A71C3F28681C2700919977 /* LaunchViewModel.swift */; };
+		82A71C42286821A200919977 /* UIViewController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A71C41286821A200919977 /* UIViewController+Ext.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,6 +45,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		82391A4028682D660026298A /* TLCSeparatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TLCSeparatorView.swift; sourceTree = "<group>"; };
 		82A71BF62865F61500919977 /* TLCspaceX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TLCspaceX.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		82A71BF92865F61500919977 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		82A71BFB2865F61500919977 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -51,6 +60,13 @@
 		82A71C1A2865F61600919977 /* TLCspaceXUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TLCspaceXUITests.swift; sourceTree = "<group>"; };
 		82A71C1C2865F61600919977 /* TLCspaceXUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TLCspaceXUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		82A71C31286610D400919977 /* Launch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Launch.swift; sourceTree = "<group>"; };
+		82A71C352866150600919977 /* LaunchCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchCollectionViewCell.swift; sourceTree = "<group>"; };
+		82A71C3728673FD600919977 /* ViewModelManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelManager.swift; sourceTree = "<group>"; };
+		82A71C392867401600919977 /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
+		82A71C3B28677A4C00919977 /* Constant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
+		82A71C3D286818E000919977 /* TLCError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TLCError.swift; sourceTree = "<group>"; };
+		82A71C3F28681C2700919977 /* LaunchViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewModel.swift; sourceTree = "<group>"; };
+		82A71C41286821A200919977 /* UIViewController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Ext.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +94,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		82391A3F28682D4B0026298A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				82391A4028682D660026298A /* TLCSeparatorView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		82A71BED2865F61500919977 = {
 			isa = PBXGroup;
 			children = (
@@ -133,6 +157,7 @@
 		82A71C292865FB0E00919977 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				82A71C41286821A200919977 /* UIViewController+Ext.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -140,6 +165,8 @@
 		82A71C2A2865FB1D00919977 /* Utility */ = {
 			isa = PBXGroup;
 			children = (
+				82A71C3B28677A4C00919977 /* Constant.swift */,
+				82A71C3D286818E000919977 /* TLCError.swift */,
 			);
 			path = Utility;
 			sourceTree = "<group>";
@@ -159,6 +186,8 @@
 		82A71C2C2865FB3E00919977 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
+				82A71C3728673FD600919977 /* ViewModelManager.swift */,
+				82A71C392867401600919977 /* NetworkManager.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -166,6 +195,7 @@
 		82A71C2D2865FB5500919977 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				82A71C332866147300919977 /* Custom */,
 				82A71C302865FB9600919977 /* Screen */,
 			);
 			path = View;
@@ -174,6 +204,7 @@
 		82A71C2E2865FB6600919977 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				82A71C3F28681C2700919977 /* LaunchViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -192,6 +223,23 @@
 				82A71BFD2865F61500919977 /* LaunchListViewController.swift */,
 			);
 			path = Screen;
+			sourceTree = "<group>";
+		};
+		82A71C332866147300919977 /* Custom */ = {
+			isa = PBXGroup;
+			children = (
+				82391A3F28682D4B0026298A /* View */,
+				82A71C342866148300919977 /* Cell */,
+			);
+			path = Custom;
+			sourceTree = "<group>";
+		};
+		82A71C342866148300919977 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				82A71C352866150600919977 /* LaunchCollectionViewCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -325,10 +373,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				82A71C362866150600919977 /* LaunchCollectionViewCell.swift in Sources */,
 				82A71BFE2865F61500919977 /* LaunchListViewController.swift in Sources */,
 				82A71BFA2865F61500919977 /* AppDelegate.swift in Sources */,
+				82A71C42286821A200919977 /* UIViewController+Ext.swift in Sources */,
+				82A71C3C28677A4C00919977 /* Constant.swift in Sources */,
+				82A71C3A2867401600919977 /* NetworkManager.swift in Sources */,
 				82A71C32286610D400919977 /* Launch.swift in Sources */,
+				82A71C3E286818E000919977 /* TLCError.swift in Sources */,
+				82391A4128682D660026298A /* TLCSeparatorView.swift in Sources */,
+				82A71C3828673FD600919977 /* ViewModelManager.swift in Sources */,
 				82A71BFC2865F61500919977 /* SceneDelegate.swift in Sources */,
+				82A71C4028681C2700919977 /* LaunchViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

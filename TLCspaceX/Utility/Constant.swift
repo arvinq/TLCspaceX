@@ -7,8 +7,8 @@ import UIKit
 
 /// Easy access values used for network
 enum Network {
-    static let baseURL = "https://api.spacexdata.com/v4/"
-    static let launch  = "launches/"
+    static let baseURL = "https://api.spacexdata.com"
+    static let launch  = "v4/launches"
 }
 
 /// Constant values representing titles on the pages in the app

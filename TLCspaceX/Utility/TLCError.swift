@@ -12,4 +12,5 @@ enum TLCError: String, Error {
     case nilData          = "No data received. Please try again at a later time"
     case unableToComplete = "Unable to complete your request. Please check your network connection and try again."
     case unableToDecode   = "Unable to decode the data. Please check if you're decoding your data correctly."
+    case invalidStaticUrl = "Invalid static URL string: %@"
 }

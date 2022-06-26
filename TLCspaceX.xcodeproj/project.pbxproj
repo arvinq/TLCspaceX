@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		82391A4128682D660026298A /* TLCSeparatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82391A4028682D660026298A /* TLCSeparatorView.swift */; };
+		82391A432868836F0026298A /* URL+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82391A422868836F0026298A /* URL+Ext.swift */; };
 		82A71BFA2865F61500919977 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A71BF92865F61500919977 /* AppDelegate.swift */; };
 		82A71BFC2865F61500919977 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A71BFB2865F61500919977 /* SceneDelegate.swift */; };
 		82A71BFE2865F61500919977 /* LaunchListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A71BFD2865F61500919977 /* LaunchListViewController.swift */; };
@@ -46,6 +47,7 @@
 
 /* Begin PBXFileReference section */
 		82391A4028682D660026298A /* TLCSeparatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TLCSeparatorView.swift; sourceTree = "<group>"; };
+		82391A422868836F0026298A /* URL+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+Ext.swift"; sourceTree = "<group>"; };
 		82A71BF62865F61500919977 /* TLCspaceX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TLCspaceX.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		82A71BF92865F61500919977 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		82A71BFB2865F61500919977 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -158,6 +160,7 @@
 			isa = PBXGroup;
 			children = (
 				82A71C41286821A200919977 /* UIViewController+Ext.swift */,
+				82391A422868836F0026298A /* URL+Ext.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -383,6 +386,7 @@
 				82A71C3E286818E000919977 /* TLCError.swift in Sources */,
 				82391A4128682D660026298A /* TLCSeparatorView.swift in Sources */,
 				82A71C3828673FD600919977 /* ViewModelManager.swift in Sources */,
+				82391A432868836F0026298A /* URL+Ext.swift in Sources */,
 				82A71BFC2865F61500919977 /* SceneDelegate.swift in Sources */,
 				82A71C4028681C2700919977 /* LaunchViewModel.swift in Sources */,
 			);

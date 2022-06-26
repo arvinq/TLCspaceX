@@ -11,13 +11,16 @@ protocol NetworkManagerProtocol {
 
 class NetworkManager: NetworkManagerProtocol {
     
+    /// baseURL from SpaceX
+    var spacexBaseURL: URL { return URL(Network.baseURL) }
+    
     /**
      * Fetch list of launches from API. Will Return a Result set type containing an array of launches or an error if encountered.
      *  - Parameters:
      *      - completion: handler to invoke passing the result type which is either a list of launches or an error.
      */
     func getLaunches(completion: @escaping (Result<[Launch], TLCError>) -> Void) {
-        guard let launchURL = URL(string: Network.baseURL + Network.launch) else {
+        guard let launchURL = URL(string: Network.launch, relativeTo: spacexBaseURL) else {
             completion(.failure(.invalidUrl))
             return
         }

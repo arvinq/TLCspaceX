@@ -17,6 +17,8 @@ enum Network {
 enum Title {
     static let launchList = "SpaceX Launches List"
     static let launchAlert = "SpaceX Launch"
+    static let getRocket = "Get Rocket"
+    static let rocketAlert = "Rocket"
 }
 
 /// Constant values to be used for animations
@@ -42,9 +44,11 @@ enum AlertButton {
 /// Constant values that represents Sizes used in the app
 enum Size {
     static let separatorHeight: CGFloat = 1.0
+    static let buttonHeight: CGFloat = 44.0
 }
 
 /// Constant values that represents Spaces used in the app
 enum Space {
     static let padding: CGFloat = 8.0
+    static let cornerRadius: CGFloat = 5.0
 }

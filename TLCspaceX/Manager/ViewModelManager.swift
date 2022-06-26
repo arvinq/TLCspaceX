@@ -14,6 +14,7 @@ class ViewModelManager {
     var reloadCollection: (()->())?
     var animateLoadView: (()->())?
     var bindLaunchInformation: ((LaunchInfoViewModel?)->())?
+    var bindRocketInformation: ((RocketInfoViewModel?)->())?
     
     // Properties that triggers binding and updates our view
     var alertMessage: String? {
@@ -30,6 +31,10 @@ class ViewModelManager {
     
     var launchInfoViewModel: LaunchInfoViewModel? {
         didSet { self.bindLaunchInformation?(launchInfoViewModel) }
+    }
+    
+    var rocketInfoViewModel: RocketInfoViewModel? {
+        didSet { self.bindRocketInformation?(rocketInfoViewModel) }
     }
     
     init(networkManager: NetworkManagerProtocol = NetworkManager()) {
@@ -75,6 +80,21 @@ class ViewModelManager {
             switch result {
             case .success(let launch):
                 self.launchInfoViewModel = LaunchInfoViewModel(launch: launch)
+            case .failure(let error):
+                self.alertMessage = error.rawValue
+            }
+        }
+    }
+    
+    func getOneRocket(for rocketId: String) {
+        self.isLoading = true
+        self.networkManager.getRocketInfo(for: rocketId) { [weak self] result in
+            guard let self = self else { return }
+            self.isLoading = false
+            
+            switch result {
+            case .success(let rocket):
+                self.rocketInfoViewModel = RocketInfoViewModel(rocket: rocket)
             case .failure(let error):
                 self.alertMessage = error.rawValue
             }

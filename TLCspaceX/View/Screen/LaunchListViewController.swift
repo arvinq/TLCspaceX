@@ -130,7 +130,8 @@ extension LaunchListViewController: UICollectionViewDelegate, UICollectionViewDa
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let launchInfoViewController = LaunchInfoViewController()
-        launchInfoViewController.launchCellViewModel = viewModelManager.getLaunchCellViewModel(on: indexPath.item)
+        let launchCellViewModel = viewModelManager.getLaunchCellViewModel(on: indexPath.item)
+        launchInfoViewController.launchId = launchCellViewModel.id
         
         let tempNavigationController = UINavigationController(rootViewController: launchInfoViewController)
         present(tempNavigationController, animated: true)

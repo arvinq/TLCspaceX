@@ -5,10 +5,10 @@
 
 import UIKit
 
-class LaunchInfoViewController: UIViewController {
-    
-    var launchId: String?
-    var launchInfoViewModel: LaunchInfoViewModel?
+class RocketInfoViewController: UIViewController {
+
+    var rocketId: String?
+    var rocketInfoViewModel: RocketInfoViewModel?
     
     lazy var viewModelManager: ViewModelManager = {
        return ViewModelManager()
@@ -20,52 +20,39 @@ class LaunchInfoViewController: UIViewController {
         return activityIndicator
     }()
     
-    lazy var rocketButton: TLCButton = {
-        let button = TLCButton(title: Title.getRocket, backgroundColor: .systemGray)
-        button.addTarget(self, action: #selector(rocketButtonTapped), for: .touchUpInside)
-        return button
-    }()
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
     }
-
+    
     private func setup() {
         setupView()
         setupConstraints()
         setupViewModel()
         
-        fetchLaunchInfo()
+        fetchRocketInfo()
     }
     
     private func setupView() {
         view.backgroundColor = .systemBackground
         
         view.addSubview(activityIndicator)
-        view.addSubview(rocketButton)
     }
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([
             activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            
-            rocketButton.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            rocketButton.heightAnchor.constraint(equalToConstant: Size.buttonHeight),
-            rocketButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            rocketButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5)
         ])
     }
     
-
     private func setupViewModel() {
-        viewModelManager.bindLaunchInformation = { [weak self] launchInfoViewModel in
+        viewModelManager.bindRocketInformation = { [weak self] rocketInfoViewModel in
             guard let self = self else { return }
-            self.launchInfoViewModel = launchInfoViewModel
+            self.rocketInfoViewModel = rocketInfoViewModel
             
             DispatchQueue.main.async {
-                self.title = launchInfoViewModel?.name
+                self.title = rocketInfoViewModel?.name
             }
         }
         
@@ -75,7 +62,7 @@ class LaunchInfoViewController: UIViewController {
             let message = self.viewModelManager.alertMessage ?? ""
             
             DispatchQueue.main.async {
-                self.presentAlert(withTitle: Title.launchAlert, andMessage: message, completion: nil)
+                self.presentAlert(withTitle: Title.rocketAlert, andMessage: message, completion: nil)
             }
         }
         
@@ -98,20 +85,11 @@ class LaunchInfoViewController: UIViewController {
                 }
             }
         }
+    }
+    
+    private func fetchRocketInfo() {
+        guard let rocketId = rocketId else { return }
+        viewModelManager.getOneRocket(for: rocketId)
 
-    }
-    
-    private func fetchLaunchInfo() {
-        guard let launchId = launchId else { return }
-        viewModelManager.getOneLaunch(for: launchId)
-    }
-    
-    @objc
-    private func rocketButtonTapped() {
-        let rocketInfoViewController = RocketInfoViewController()
-        rocketInfoViewController.rocketId = launchInfoViewModel?.rocketId
-        
-        let tempNavigationController = UINavigationController(rootViewController: rocketInfoViewController)
-        present(tempNavigationController, animated: true)
     }
 }

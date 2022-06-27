@@ -13,6 +13,10 @@ class TLCImageView: UIImageView {
         didSet { self.animateLoadView?() }
     }
 
+    lazy var networkManager: NetworkManager = {
+        return NetworkManager()
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setup()
@@ -40,7 +44,6 @@ class TLCImageView: UIImageView {
         
         self.isLoading = true
         
-        let networkManager = NetworkManager()
         networkManager.downloadImage(from: url) { [weak self] image in
             guard let self = self, let image = image else { return }
             

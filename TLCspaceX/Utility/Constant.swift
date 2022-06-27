@@ -7,17 +7,21 @@ import UIKit
 
 /// Easy access values used for network
 enum Network {
-    static let baseURL = "https://api.spacexdata.com"
-    static let launch  = "v4/launches"
-    static let oneLaunch = "v4/launches/%@"
-    static let oneRocket = "v4/rockets/%@"
+    static let baseURL         = "https://api.spacexdata.com"
+    static let launch          = "v4/launches"
+    static let oneLaunch       = "v4/launches/%@"
+    static let oneRocket       = "v4/rockets/%@"
+    static let youtubeThumbBaseURL = "https://i.ytimg.com"
+    static let youtubeThumbPath    = "vi/%@/hqdefault.jpg"
+    
 }
 
 /// Constant values representing titles and constants on the pages in the app
 enum Title {
-    static let launchList    = "SpaceX Launches List"
-    static let launchAlert   = "SpaceX Launch"
-    static let getRocket     = "Get Rocket"
+    static let launchList    = "Launches"
+    static let launchInfo    = "Launch Information"
+    static let launchAlert   = "Launch"
+    static let getRocket     = "View Rocket details"
     static let getRocketWiki = "Rocket Wiki"
     static let rocketAlert   = "Rocket"
     static let sortAndFilter = "Sort | Filter"
@@ -27,12 +31,18 @@ enum Title {
     static let launchDate    = "Launch Date"
     static let filterButton  = "Select Filter"
     static let applyButton   = "Apply to Launch List"
+    static let detailCaption = "Details"
+    static let dateCaption   = "Launch Date"
+    static let statusCaption = "Mission Status"
 }
 
 enum StatusDescription {
     static let success = "Successful Mission"
     static let failure = "Failed Mission"
     static let null    = "Pending Mission"
+    static let successDet = "Successful mission launch"
+    static let failureDet = "Mission launch failed"
+    static let nullDet    = "Upcoming mission. Details can't be determined at this time"
 }
 
 /// Constant values to be used for animations
@@ -81,6 +91,7 @@ enum SFSymbol {
     static let filter     = UIImage(systemName: "line.3.horizontal.decrease.circle")
     static let sort       = UIImage(systemName: "arrow.up.arrow.down.circle")
     static let close      = UIImage(systemName: "xmark")
+    static let chevron    = UIImage(systemName: "chevron.forward")
 }
 
 enum SortDescriptor {

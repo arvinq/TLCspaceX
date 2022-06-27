@@ -12,6 +12,7 @@ struct Launch: Codable {
     let dateUtc: String
     let success: Bool?
     let links: Links
+    let details: String?
 }
 
 typealias Launches = [Launch]

@@ -7,7 +7,7 @@ import Foundation
 
 struct Links: Codable {
     let patch: Patch
-    let webcast: String?
     let article: String?
     let wikipedia: String?
+    let youtubeId: String?
 }

@@ -15,13 +15,13 @@ class LaunchInfoViewController: UIViewController {
     }()
     
     lazy var launchNameLabel: DetailLabel = {
-        let label = DetailLabel(fontSize: 15.0, fontColor: .label)
+        let label = DetailLabel(fontSize: 16.0, fontColor: .label)
         return label
     }()
     
     lazy var launchDetailsCaption: DetailLabel = {
         let label = DetailLabel(fontSize: 14.0, fontColor: .label)
-        label.text = Title.detailCaption
+        label.text = Caption.detailCaption
         return label
     }()
     
@@ -33,7 +33,7 @@ class LaunchInfoViewController: UIViewController {
     
     lazy var launchDateCaption: DetailLabel = {
         let label = DetailLabel(fontSize: 14.0, fontColor: .label)
-        label.text = Title.dateCaption
+        label.text = Caption.dateCaption
         return label
     }()
     
@@ -45,7 +45,7 @@ class LaunchInfoViewController: UIViewController {
     
     lazy var launchStatusCaption: DetailLabel = {
         let label = DetailLabel(fontSize: 14.0, fontColor: .label)
-        label.text = Title.statusCaption
+        label.text = Caption.statusCaption
         return label
     }()
     
@@ -59,6 +59,12 @@ class LaunchInfoViewController: UIViewController {
         let imageView = UIImageView(image: SFSymbol.chevron?.withTintColor(.label, renderingMode: .alwaysOriginal))
         imageView.translatesAutoresizingMaskIntoConstraints = false
         return imageView
+    }()
+    
+    lazy var launchPatchsCaption: DetailLabel = {
+        let label = DetailLabel(fontSize: 14.0, fontColor: .label)
+        label.text = Caption.patchCaption
+        return label
     }()
     
     lazy var launchThumbnailImageView: TLCImageView = {
@@ -75,6 +81,7 @@ class LaunchInfoViewController: UIViewController {
     lazy var thirdSeparatorView: TLCSeparatorView = { return TLCSeparatorView() }()
     lazy var fourthSeparatorView: TLCSeparatorView = { return TLCSeparatorView() }()
     lazy var fifthSeparatorView: TLCSeparatorView = { return TLCSeparatorView() }()
+    lazy var sixthSeparatorView: TLCSeparatorView = { return TLCSeparatorView() }()
     
     lazy var activityIndicator: UIActivityIndicatorView = {
         let activityIndicator = UIActivityIndicatorView(style: .large)
@@ -125,6 +132,8 @@ class LaunchInfoViewController: UIViewController {
         view.addSubview(activityIndicator)
         view.addSubview(rocketButton)
         view.addSubview(chevronImageView)
+        
+        view.addSubview(launchPatchsCaption)
         view.addSubview(launchThumbnailImageView)
         
         // separators
@@ -133,6 +142,7 @@ class LaunchInfoViewController: UIViewController {
         view.addSubview(thirdSeparatorView)
         view.addSubview(fourthSeparatorView)
         view.addSubview(fifthSeparatorView)
+        view.addSubview(sixthSeparatorView)
     }
     
     private func setupConstraints() {
@@ -200,9 +210,18 @@ class LaunchInfoViewController: UIViewController {
             fifthSeparatorView.heightAnchor.constraint(equalToConstant: Size.separatorHeight),
             fifthSeparatorView.topAnchor.constraint(equalTo: rocketButton.bottomAnchor, constant: Space.adjacent),
 
+            launchPatchsCaption.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: Space.margin),
+            launchPatchsCaption.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -Space.margin),
+            launchPatchsCaption.topAnchor.constraint(equalTo: fifthSeparatorView.bottomAnchor, constant: Space.adjacent),
+            
             launchThumbnailImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            launchThumbnailImageView.topAnchor.constraint(equalTo: fifthSeparatorView.bottomAnchor, constant: Space.adjacent),
+            launchThumbnailImageView.topAnchor.constraint(equalTo: launchPatchsCaption.bottomAnchor, constant: Space.adjacent),
             launchThumbnailImageView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.35),
+            
+            sixthSeparatorView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
+            sixthSeparatorView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            sixthSeparatorView.heightAnchor.constraint(equalToConstant: Size.separatorHeight),
+            sixthSeparatorView.topAnchor.constraint(equalTo: launchThumbnailImageView.bottomAnchor, constant: Space.adjacent),
         ])
     }
     
@@ -213,7 +232,7 @@ class LaunchInfoViewController: UIViewController {
             
             DispatchQueue.main.async {
                 self.launchInfoViewModel = launchInfoViewModel
-                self.launchThumbnailImageView.downloadImage(from: launchInfoViewModel?.getYoutubeThumbnailURL())
+                self.launchThumbnailImageView.downloadImage(from: launchInfoViewModel?.smallPatch)
                 self.launchNameLabel.text = launchInfoViewModel?.name
                 self.launchDetailsLabel.text = launchInfoViewModel?.getLaunchDetails()
                 self.launchDateLabel.text = launchInfoViewModel?.printableLaunchDate

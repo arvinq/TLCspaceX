@@ -21,7 +21,7 @@ enum Title {
     static let launchList    = "Launches"
     static let launchInfo    = "Launch Information"
     static let launchAlert   = "Launch"
-    static let getRocket     = "View Rocket details"
+    static let getRocket     = "View Rocket Info"
     static let getRocketWiki = "Rocket Wiki"
     static let rocketInfo    = "Rocket Information"
     static let rocketAlert   = "Rocket"
@@ -32,9 +32,16 @@ enum Title {
     static let launchDate    = "Launch Date"
     static let filterButton  = "Select Filter"
     static let applyButton   = "Apply to Launch List"
-    static let detailCaption = "Details"
-    static let dateCaption   = "Launch Date"
-    static let statusCaption = "Mission Status"
+}
+
+enum Caption {
+    static let detailCaption      = "Details"
+    static let descriptionCaption = "Description"
+    static let dateCaption        = "Launch Date"
+    static let statusCaption      = "Mission Status"
+    static let patchCaption       = "Official Patch"
+    static let boosterCaption     = "Number of booster"
+    static let successRateCaption = "Success Rate percentage"
 }
 
 enum StatusDescription {
@@ -82,6 +89,7 @@ enum Space {
     static let padding: CGFloat = 8.0
     static let cornerRadius: CGFloat = 5.0
     static let adjacent: CGFloat = 14.0
+    static let sameGroupAdjacent: CGFloat = 2.0
     static let margin: CGFloat = 20.0
 }
 

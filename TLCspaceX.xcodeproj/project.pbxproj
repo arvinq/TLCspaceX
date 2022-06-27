@@ -27,6 +27,10 @@
 		8272A04628698E5500ABFB8F /* Patch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8272A04528698E5500ABFB8F /* Patch.swift */; };
 		8272A0492869984E00ABFB8F /* TLCImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8272A0482869984E00ABFB8F /* TLCImageView.swift */; };
 		8272A04F2869D9F800ABFB8F /* Date+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8272A04E2869D9F800ABFB8F /* Date+Ext.swift */; };
+		8272A051286A42CD00ABFB8F /* Height.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8272A050286A42CD00ABFB8F /* Height.swift */; };
+		8272A053286A435000ABFB8F /* Diameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8272A052286A435000ABFB8F /* Diameter.swift */; };
+		8272A055286A437000ABFB8F /* Mass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8272A054286A437000ABFB8F /* Mass.swift */; };
+		8272A057286A449500ABFB8F /* Engines.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8272A056286A449500ABFB8F /* Engines.swift */; };
 		82A71BFA2865F61500919977 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A71BF92865F61500919977 /* AppDelegate.swift */; };
 		82A71BFC2865F61500919977 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A71BFB2865F61500919977 /* SceneDelegate.swift */; };
 		82A71BFE2865F61500919977 /* LaunchListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A71BFD2865F61500919977 /* LaunchListViewController.swift */; };
@@ -84,6 +88,10 @@
 		8272A04528698E5500ABFB8F /* Patch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Patch.swift; sourceTree = "<group>"; };
 		8272A0482869984E00ABFB8F /* TLCImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TLCImageView.swift; sourceTree = "<group>"; };
 		8272A04E2869D9F800ABFB8F /* Date+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Ext.swift"; sourceTree = "<group>"; };
+		8272A050286A42CD00ABFB8F /* Height.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Height.swift; sourceTree = "<group>"; };
+		8272A052286A435000ABFB8F /* Diameter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Diameter.swift; sourceTree = "<group>"; };
+		8272A054286A437000ABFB8F /* Mass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mass.swift; sourceTree = "<group>"; };
+		8272A056286A449500ABFB8F /* Engines.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Engines.swift; sourceTree = "<group>"; };
 		82A71BF62865F61500919977 /* TLCspaceX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TLCspaceX.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		82A71BF92865F61500919977 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		82A71BFB2865F61500919977 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -294,6 +302,10 @@
 				8272A02D2868BDF200ABFB8F /* Rocket.swift */,
 				8272A04328698DDE00ABFB8F /* Links.swift */,
 				8272A04528698E5500ABFB8F /* Patch.swift */,
+				8272A050286A42CD00ABFB8F /* Height.swift */,
+				8272A054286A437000ABFB8F /* Mass.swift */,
+				8272A052286A435000ABFB8F /* Diameter.swift */,
+				8272A056286A449500ABFB8F /* Engines.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -462,18 +474,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8272A051286A42CD00ABFB8F /* Height.swift in Sources */,
 				82391A4728689DE10026298A /* LaunchInfoViewModel.swift in Sources */,
 				82A71C362866150600919977 /* LaunchCollectionViewCell.swift in Sources */,
 				8272A04F2869D9F800ABFB8F /* Date+Ext.swift in Sources */,
 				8272A0372869393400ABFB8F /* UILabel+Ext.swift in Sources */,
 				82A71BFE2865F61500919977 /* LaunchListViewController.swift in Sources */,
+				8272A057286A449500ABFB8F /* Engines.swift in Sources */,
 				82A71BFA2865F61500919977 /* AppDelegate.swift in Sources */,
+				8272A055286A437000ABFB8F /* Mass.swift in Sources */,
 				82A71C42286821A200919977 /* UIViewController+Ext.swift in Sources */,
 				82A71C3C28677A4C00919977 /* Constant.swift in Sources */,
 				8272A0302868DAEE00ABFB8F /* FilterSortViewController.swift in Sources */,
 				8272A0332869344600ABFB8F /* HeaderLabel.swift in Sources */,
 				8272A04228696DE300ABFB8F /* NotificationName+Ext.swift in Sources */,
 				82A71C3A2867401600919977 /* NetworkManager.swift in Sources */,
+				8272A053286A435000ABFB8F /* Diameter.swift in Sources */,
 				8272A04428698DDE00ABFB8F /* Links.swift in Sources */,
 				82A71C32286610D400919977 /* Launch.swift in Sources */,
 				82A71C3E286818E000919977 /* TLCError.swift in Sources */,

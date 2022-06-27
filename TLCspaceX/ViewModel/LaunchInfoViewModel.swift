@@ -13,6 +13,7 @@ struct LaunchInfoViewModel {
     let success: Bool?
     let youtubeId: String?
     let details: String?
+    let smallPatch: String?
     
     init(launch: Launch) {
         self.name = launch.name
@@ -22,6 +23,7 @@ struct LaunchInfoViewModel {
         self.printableLaunchDate = launch.dateUtc.convertToPrintableDateFormat()
         self.youtubeId = launch.links.youtubeId
         self.details = launch.details
+        self.smallPatch = launch.links.patch.small
     }
     
     func getYoutubeThumbnailURL() -> String? {

@@ -25,6 +25,10 @@ class ViewModelManager {
         didSet { self.reloadCollection?() }
     }
     
+    var filteredLaunchViewModels: [LaunchCellViewModel] = [] {
+        didSet { self.reloadCollection?() }
+    }
+    
     var isLoading: Bool = false {
         didSet { self.animateLoadView?() }
     }
@@ -35,6 +39,10 @@ class ViewModelManager {
     
     var rocketInfoViewModel: RocketInfoViewModel? {
         didSet { self.bindRocketInformation?(rocketInfoViewModel) }
+    }
+    
+    var sortDescriptor: SortDescriptor? {
+        didSet { self.sortLaunchList() }
     }
     
     init(networkManager: NetworkManagerProtocol = NetworkManager()) {
@@ -51,6 +59,16 @@ class ViewModelManager {
     }
     
     /**
+     * Returns an individual launch view model at a given index in the array.
+     *  - Parameters:
+     *      - index: integer passed that represents the location of the launch in the list
+     *      - isFiltered: bool value to indicate on what list we will get the viewModel
+     */
+    func getLaunchCellViewModel(on index: Int, isFiltered: Bool) -> LaunchCellViewModel {
+        return isFiltered ? filteredLaunchViewModels[index] : launchCellViewModels[index]
+    }
+    
+    /**
      * Main entry point that communicates with NetworkManager to fetch the launches and trigger an update to the collectionView
      */
     func getLaunches() {
@@ -64,7 +82,7 @@ class ViewModelManager {
                 var launchCellViewModels = [LaunchCellViewModel]()
                 launchCellViewModels.append(contentsOf: launches.map { LaunchCellViewModel(launch: $0) })
                 self.launchCellViewModels = launchCellViewModels // will trigger the reload
-                
+                self.setInitialFilteredLaunches()
             case .failure(let error):
                 self.alertMessage = error.rawValue
             }
@@ -99,5 +117,44 @@ class ViewModelManager {
                 self.alertMessage = error.rawValue
             }
         }
+    }
+    
+    func setInitialFilteredLaunches() {
+        filteredLaunchViewModels = launchCellViewModels
+    }
+    
+    func sortLaunchList() {
+        switch sortDescriptor {
+        case .missionName:
+            filteredLaunchViewModels.sort { $0.name < $1.name }
+        case .launchDate:
+            filteredLaunchViewModels.sort { $0.launchDate > $1.launchDate }
+        case .none: break
+        }
+    }
+    
+    func setFilteredLaunchList(for launchStatus: String) {
+        guard launchStatus != "All launch" else {
+            setInitialFilteredLaunches()
+            return
+        }
+        
+        // TODO: We can refactor this in the future where we'll have an enumerated type for launch status
+        var compareStatus: Bool?
+        if launchStatus == "Success" {
+            compareStatus = true
+        } else if launchStatus == "Failure" {
+            compareStatus = false
+        } else if launchStatus == "No status" {
+            compareStatus = nil
+        }
+        
+        filteredLaunchViewModels = launchCellViewModels.filter { $0.success == compareStatus }
+        sortLaunchList()
+    }
+    
+    /// Returns our viewModel list based on the app's status if filtered is applied or not.
+    func getLaunchViewModels(isFiltered: Bool) -> [LaunchCellViewModel] {
+        return isFiltered ? filteredLaunchViewModels : launchCellViewModels
     }
 }

@@ -34,9 +34,18 @@ class LaunchListViewController: UIViewController {
         return barButtonItem
     }()
     
+    lazy var refreshControl: UIRefreshControl = {
+       let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refreshCollection), for: .valueChanged)
+        return refreshControl
+        
+    }()
+    
     lazy var viewModelManager: ViewModelManager = {
        return ViewModelManager()
     }()
+    
+    var isFiltered: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,6 +56,7 @@ class LaunchListViewController: UIViewController {
         setupView()
         setupConstraint()
         setupViewModel()
+        setupObserver()
         
         // fetch the launches and setup into our collectionView
         viewModelManager.getLaunches()
@@ -57,6 +67,7 @@ class LaunchListViewController: UIViewController {
         title = Title.launchList
         navigationItem.setRightBarButton(filterSortBarButtonItem, animated: true)
         
+        launchCollectionView.refreshControl = refreshControl
         view.addSubview(activityIndicator)
         view.addSubview(launchCollectionView)
     }
@@ -112,7 +123,21 @@ class LaunchListViewController: UIViewController {
                 }
             }
         }
-
+    }
+    
+    func setupObserver() {
+        NotificationCenter.default.addObserver(forName: .TLCApplyFilterAndSort, object: nil, queue: nil) { [weak self] notification in
+            guard let self = self else { return }
+            
+            self.isFiltered = true
+            DispatchQueue.main.async { self.launchCollectionView.reloadData() }
+        }
+    }
+    
+    @objc
+    func refreshCollection() {
+        viewModelManager.getLaunches()
+        launchCollectionView.refreshControl?.endRefreshing()
     }
     
     /// Show filter and sort view controller
@@ -120,18 +145,22 @@ class LaunchListViewController: UIViewController {
     private func filterSortPressed() {
         let filterSortViewController = FilterSortViewController()
         let tempNavigationController = UINavigationController(rootViewController: filterSortViewController)
+
+        filterSortViewController.viewModelManager = viewModelManager
+        
         present(tempNavigationController, animated: true)
     }
 }
 
 extension LaunchListViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        viewModelManager.launchCellViewModels.count
+        let launchViewModels = viewModelManager.getLaunchViewModels(isFiltered: isFiltered)
+        return launchViewModels.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let launchCell = collectionView.dequeueReusableCell(withReuseIdentifier: LaunchCollectionViewCell.reuseId, for: indexPath) as! LaunchCollectionViewCell
-        launchCell.launchViewModel = viewModelManager.getLaunchCellViewModel(on: indexPath.item)
+        launchCell.launchViewModel = viewModelManager.getLaunchCellViewModel(on: indexPath.item, isFiltered: isFiltered)
         return launchCell
     }
     
@@ -144,7 +173,7 @@ extension LaunchListViewController: UICollectionViewDelegate, UICollectionViewDa
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let launchInfoViewController = LaunchInfoViewController()
-        let launchCellViewModel = viewModelManager.getLaunchCellViewModel(on: indexPath.item)
+        let launchCellViewModel = viewModelManager.getLaunchCellViewModel(on: indexPath.item, isFiltered: isFiltered)
         launchInfoViewController.launchId = launchCellViewModel.id
         
         let tempNavigationController = UINavigationController(rootViewController: launchInfoViewController)

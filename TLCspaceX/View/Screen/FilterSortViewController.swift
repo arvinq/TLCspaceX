@@ -23,13 +23,13 @@ class FilterSortViewController: UIViewController {
     }()
     
     lazy var missionNameLabel: SubHeaderLabel = {
-        let label = SubHeaderLabel(fontSize: FontSize.subHeader, fontColor: .secondaryLabel)
+        let label = SubHeaderLabel(fontSize: FontSize.subHeader, fontColor: .tertiaryLabel)
         label.setImageAndText(usingImage: SFSymbol.alphabet!, andText: Title.missionName)
         return label
     }()
     
     lazy var launchDateLabel: SubHeaderLabel = {
-        let label = SubHeaderLabel(fontSize: FontSize.subHeader, fontColor: .secondaryLabel)
+        let label = SubHeaderLabel(fontSize: FontSize.subHeader, fontColor: .tertiaryLabel)
         label.setImageAndText(usingImage: SFSymbol.calendar!, andText: Title.launchDate)
         return label
     }()
@@ -73,7 +73,9 @@ class FilterSortViewController: UIViewController {
         return button
     }()
     
-    var filterOptionsDatasource: [String] = ["All", "Success", "Failure"]
+    var viewModelManager: ViewModelManager?
+    
+    var filterOptionsDatasource: [String] = ["All launch", "Success", "Failure", "No status"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -83,6 +85,7 @@ class FilterSortViewController: UIViewController {
     private func setup() {
         setupView()
         setupConstraints()
+        setupGestureRecognizers()
     }
     
     private func setupView() {
@@ -135,6 +138,33 @@ class FilterSortViewController: UIViewController {
         ])
     }
     
+    /**
+     * Sets up the gesture recognizer for the sort labels. Each of the sorting labels correspond to a sort descriptor
+     */
+    private func setupGestureRecognizers() {
+        let missionNameGesture = SorterTapGestureRecognizer(target: self, action: #selector(sorterLabelTapped(_:)))
+        missionNameGesture.sortDescriptor = .missionName
+        missionNameLabel.addGestureRecognizer(missionNameGesture)
+        
+        let launchDateGesture = SorterTapGestureRecognizer(target: self, action: #selector(sorterLabelTapped(_:)))
+        launchDateGesture.sortDescriptor = .launchDate
+        launchDateLabel.addGestureRecognizer(launchDateGesture)
+    }
+    
+    @objc
+    private func sorterLabelTapped(_ sender: SorterTapGestureRecognizer) {
+        // reset back all of the sorting label's text color
+        [missionNameLabel, launchDateLabel].forEach {
+            $0?.textColor = .tertiaryLabel
+        }
+        
+        // after resetting back the colors, apply a different color on the selected sort label
+        guard let selectedLabel = sender.view as? UILabel else { return }
+        selectedLabel.textColor = .secondaryLabel
+        
+        viewModelManager?.sortDescriptor = sender.sortDescriptor ?? .launchDate
+    }
+    
     @objc
     private func closePressed() {
         dismiss(animated: true)
@@ -147,7 +177,9 @@ class FilterSortViewController: UIViewController {
     
     @objc
     private func applyPressed() {
-        print("apply")
+        dismiss(animated: true) {
+            NotificationCenter.default.post(.init(name: .TLCApplyFilterAndSort))
+        }
     }
     
     private func showFilterTableView() {
@@ -187,7 +219,9 @@ extension FilterSortViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        filterButton.setTitle(self.filterOptionsDatasource[indexPath.row], for: .normal)
+        let selectedFilter = self.filterOptionsDatasource[indexPath.row]
+        filterButton.setTitle(selectedFilter, for: .normal)
         hideFilterTableView()
+        viewModelManager?.setFilteredLaunchList(for: selectedFilter)
     }
 }

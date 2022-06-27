@@ -20,6 +20,9 @@
 		8272A035286934B500ABFB8F /* SubHeaderLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8272A034286934B500ABFB8F /* SubHeaderLabel.swift */; };
 		8272A0372869393400ABFB8F /* UILabel+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8272A0362869393400ABFB8F /* UILabel+Ext.swift */; };
 		8272A039286941DB00ABFB8F /* OptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8272A038286941DB00ABFB8F /* OptionTableViewCell.swift */; };
+		8272A03C28695DEF00ABFB8F /* SorterTapGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8272A03B28695DEF00ABFB8F /* SorterTapGestureRecognizer.swift */; };
+		8272A0402869680500ABFB8F /* String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8272A03F2869680500ABFB8F /* String+Ext.swift */; };
+		8272A04228696DE300ABFB8F /* NotificationName+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8272A04128696DE300ABFB8F /* NotificationName+Ext.swift */; };
 		82A71BFA2865F61500919977 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A71BF92865F61500919977 /* AppDelegate.swift */; };
 		82A71BFC2865F61500919977 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A71BFB2865F61500919977 /* SceneDelegate.swift */; };
 		82A71BFE2865F61500919977 /* LaunchListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A71BFD2865F61500919977 /* LaunchListViewController.swift */; };
@@ -70,6 +73,9 @@
 		8272A034286934B500ABFB8F /* SubHeaderLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubHeaderLabel.swift; sourceTree = "<group>"; };
 		8272A0362869393400ABFB8F /* UILabel+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Ext.swift"; sourceTree = "<group>"; };
 		8272A038286941DB00ABFB8F /* OptionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionTableViewCell.swift; sourceTree = "<group>"; };
+		8272A03B28695DEF00ABFB8F /* SorterTapGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SorterTapGestureRecognizer.swift; sourceTree = "<group>"; };
+		8272A03F2869680500ABFB8F /* String+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Ext.swift"; sourceTree = "<group>"; };
+		8272A04128696DE300ABFB8F /* NotificationName+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationName+Ext.swift"; sourceTree = "<group>"; };
 		82A71BF62865F61500919977 /* TLCspaceX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TLCspaceX.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		82A71BF92865F61500919977 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		82A71BFB2865F61500919977 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -143,6 +149,14 @@
 			path = Label;
 			sourceTree = "<group>";
 		};
+		8272A03A28695DC800ABFB8F /* Gesture */ = {
+			isa = PBXGroup;
+			children = (
+				8272A03B28695DEF00ABFB8F /* SorterTapGestureRecognizer.swift */,
+			);
+			path = Gesture;
+			sourceTree = "<group>";
+		};
 		82A71BED2865F61500919977 = {
 			isa = PBXGroup;
 			children = (
@@ -201,6 +215,8 @@
 				82A71C41286821A200919977 /* UIViewController+Ext.swift */,
 				82391A422868836F0026298A /* URL+Ext.swift */,
 				8272A0362869393400ABFB8F /* UILabel+Ext.swift */,
+				8272A03F2869680500ABFB8F /* String+Ext.swift */,
+				8272A04128696DE300ABFB8F /* NotificationName+Ext.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -277,6 +293,7 @@
 		82A71C332866147300919977 /* Custom */ = {
 			isa = PBXGroup;
 			children = (
+				8272A03A28695DC800ABFB8F /* Gesture */,
 				8272A0312869342A00ABFB8F /* Label */,
 				8272A0262868B1D800ABFB8F /* Button */,
 				82391A3F28682D4B0026298A /* View */,
@@ -434,12 +451,15 @@
 				82A71C3C28677A4C00919977 /* Constant.swift in Sources */,
 				8272A0302868DAEE00ABFB8F /* FilterSortViewController.swift in Sources */,
 				8272A0332869344600ABFB8F /* HeaderLabel.swift in Sources */,
+				8272A04228696DE300ABFB8F /* NotificationName+Ext.swift in Sources */,
 				82A71C3A2867401600919977 /* NetworkManager.swift in Sources */,
 				82A71C32286610D400919977 /* Launch.swift in Sources */,
 				82A71C3E286818E000919977 /* TLCError.swift in Sources */,
 				8272A039286941DB00ABFB8F /* OptionTableViewCell.swift in Sources */,
 				8272A0282868B38900ABFB8F /* TLCButton.swift in Sources */,
 				8272A035286934B500ABFB8F /* SubHeaderLabel.swift in Sources */,
+				8272A03C28695DEF00ABFB8F /* SorterTapGestureRecognizer.swift in Sources */,
+				8272A0402869680500ABFB8F /* String+Ext.swift in Sources */,
 				8272A02A2868BB8A00ABFB8F /* RocketInfoViewController.swift in Sources */,
 				82391A4128682D660026298A /* TLCSeparatorView.swift in Sources */,
 				82A71C3828673FD600919977 /* ViewModelManager.swift in Sources */,

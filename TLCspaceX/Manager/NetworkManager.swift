@@ -50,6 +50,7 @@ class NetworkManager: NetworkManagerProtocol {
             do {
                 let decoder = JSONDecoder()
                 decoder.keyDecodingStrategy = .convertFromSnakeCase
+                decoder.dateDecodingStrategy = .iso8601
                 
                 let launches = try decoder.decode([Launch].self, from: data)
                 
@@ -100,6 +101,7 @@ class NetworkManager: NetworkManagerProtocol {
             do {
                 let decoder = JSONDecoder()
                 decoder.keyDecodingStrategy = .convertFromSnakeCase
+                decoder.dateDecodingStrategy = .iso8601
                 
                 let oneLaunch = try decoder.decode(Launch.self, from: data)
                 
@@ -150,6 +152,7 @@ class NetworkManager: NetworkManagerProtocol {
             do {
                 let decoder = JSONDecoder()
                 decoder.keyDecodingStrategy = .convertFromSnakeCase
+                decoder.dateDecodingStrategy = .iso8601
                 
                 let oneRocket = try decoder.decode(Rocket.self, from: data)
                 

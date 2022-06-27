@@ -76,3 +76,7 @@ enum SFSymbol {
     static let sort       = UIImage(systemName: "arrow.up.arrow.down.circle")
     static let close      = UIImage(systemName: "xmark")
 }
+
+enum SortDescriptor {
+    case missionName, launchDate
+}

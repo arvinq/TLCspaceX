@@ -16,6 +16,8 @@ class NetworkManager: NetworkManagerProtocol {
     /// baseURL from SpaceX
     var spacexBaseURL: URL { return URL(Network.baseURL) }
     
+    static let cache = NSCache<NSString, UIImage>()
+    
     /**
      * Fetch list of launches from API. Will Return a Result set type containing an array of launches or an error if encountered.
      *  - Parameters:
@@ -161,6 +163,44 @@ class NetworkManager: NetworkManagerProtocol {
                 // if there's an issue in decoding
                 completion(.failure(.unableToDecode))
             }
+        }
+        
+        task.resume()
+    }
+    
+    /**
+     * Get the image to display using the downloadUrl in the api. This returns an optional image.
+     *  - Parameters:
+     *      - urlString: the url to get the image resource
+     *      - completion: handler to invoke passing the optional image downloaded.
+     */
+    func downloadImage(from urlString: String, completion: @escaping (UIImage?) -> Void) {
+        let cacheKey = NSString(string: urlString)
+        
+        // return the image if its already in our cache
+        if let image = NetworkManager.cache.object(forKey: cacheKey) {
+            completion(image)
+            return
+        }
+        
+        guard let url = URL(string: urlString) else {
+            completion(nil)
+            return
+        }
+        
+        let task = URLSession.shared.dataTask(with: url) { data, response, error in
+            
+            guard error == nil,
+                  let response = response as? HTTPURLResponse, response.statusCode == 200,
+                  let data = data,
+                  let image = UIImage(data: data) else {
+                      completion(nil)
+                      return
+                  }
+            
+            // cache our image
+            NetworkManager.cache.setObject(image, forKey: cacheKey)
+            completion(image)
         }
         
         task.resume()

@@ -17,12 +17,16 @@
 		8272A02E2868BDF200ABFB8F /* Rocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8272A02D2868BDF200ABFB8F /* Rocket.swift */; };
 		8272A0302868DAEE00ABFB8F /* FilterSortViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8272A02F2868DAEE00ABFB8F /* FilterSortViewController.swift */; };
 		8272A0332869344600ABFB8F /* HeaderLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8272A0322869344600ABFB8F /* HeaderLabel.swift */; };
-		8272A035286934B500ABFB8F /* SubHeaderLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8272A034286934B500ABFB8F /* SubHeaderLabel.swift */; };
+		8272A035286934B500ABFB8F /* DetailLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8272A034286934B500ABFB8F /* DetailLabel.swift */; };
 		8272A0372869393400ABFB8F /* UILabel+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8272A0362869393400ABFB8F /* UILabel+Ext.swift */; };
 		8272A039286941DB00ABFB8F /* OptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8272A038286941DB00ABFB8F /* OptionTableViewCell.swift */; };
 		8272A03C28695DEF00ABFB8F /* SorterTapGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8272A03B28695DEF00ABFB8F /* SorterTapGestureRecognizer.swift */; };
 		8272A0402869680500ABFB8F /* String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8272A03F2869680500ABFB8F /* String+Ext.swift */; };
 		8272A04228696DE300ABFB8F /* NotificationName+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8272A04128696DE300ABFB8F /* NotificationName+Ext.swift */; };
+		8272A04428698DDE00ABFB8F /* Links.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8272A04328698DDE00ABFB8F /* Links.swift */; };
+		8272A04628698E5500ABFB8F /* Patch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8272A04528698E5500ABFB8F /* Patch.swift */; };
+		8272A0492869984E00ABFB8F /* TLCImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8272A0482869984E00ABFB8F /* TLCImageView.swift */; };
+		8272A04F2869D9F800ABFB8F /* Date+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8272A04E2869D9F800ABFB8F /* Date+Ext.swift */; };
 		82A71BFA2865F61500919977 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A71BF92865F61500919977 /* AppDelegate.swift */; };
 		82A71BFC2865F61500919977 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A71BFB2865F61500919977 /* SceneDelegate.swift */; };
 		82A71BFE2865F61500919977 /* LaunchListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A71BFD2865F61500919977 /* LaunchListViewController.swift */; };
@@ -70,12 +74,16 @@
 		8272A02D2868BDF200ABFB8F /* Rocket.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Rocket.swift; sourceTree = "<group>"; };
 		8272A02F2868DAEE00ABFB8F /* FilterSortViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterSortViewController.swift; sourceTree = "<group>"; };
 		8272A0322869344600ABFB8F /* HeaderLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderLabel.swift; sourceTree = "<group>"; };
-		8272A034286934B500ABFB8F /* SubHeaderLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubHeaderLabel.swift; sourceTree = "<group>"; };
+		8272A034286934B500ABFB8F /* DetailLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailLabel.swift; sourceTree = "<group>"; };
 		8272A0362869393400ABFB8F /* UILabel+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+Ext.swift"; sourceTree = "<group>"; };
 		8272A038286941DB00ABFB8F /* OptionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OptionTableViewCell.swift; sourceTree = "<group>"; };
 		8272A03B28695DEF00ABFB8F /* SorterTapGestureRecognizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SorterTapGestureRecognizer.swift; sourceTree = "<group>"; };
 		8272A03F2869680500ABFB8F /* String+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Ext.swift"; sourceTree = "<group>"; };
 		8272A04128696DE300ABFB8F /* NotificationName+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NotificationName+Ext.swift"; sourceTree = "<group>"; };
+		8272A04328698DDE00ABFB8F /* Links.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Links.swift; sourceTree = "<group>"; };
+		8272A04528698E5500ABFB8F /* Patch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Patch.swift; sourceTree = "<group>"; };
+		8272A0482869984E00ABFB8F /* TLCImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TLCImageView.swift; sourceTree = "<group>"; };
+		8272A04E2869D9F800ABFB8F /* Date+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Ext.swift"; sourceTree = "<group>"; };
 		82A71BF62865F61500919977 /* TLCspaceX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TLCspaceX.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		82A71BF92865F61500919977 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		82A71BFB2865F61500919977 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -144,7 +152,7 @@
 			isa = PBXGroup;
 			children = (
 				8272A0322869344600ABFB8F /* HeaderLabel.swift */,
-				8272A034286934B500ABFB8F /* SubHeaderLabel.swift */,
+				8272A034286934B500ABFB8F /* DetailLabel.swift */,
 			);
 			path = Label;
 			sourceTree = "<group>";
@@ -155,6 +163,14 @@
 				8272A03B28695DEF00ABFB8F /* SorterTapGestureRecognizer.swift */,
 			);
 			path = Gesture;
+			sourceTree = "<group>";
+		};
+		8272A0472869983100ABFB8F /* ImageView */ = {
+			isa = PBXGroup;
+			children = (
+				8272A0482869984E00ABFB8F /* TLCImageView.swift */,
+			);
+			path = ImageView;
 			sourceTree = "<group>";
 		};
 		82A71BED2865F61500919977 = {
@@ -217,6 +233,7 @@
 				8272A0362869393400ABFB8F /* UILabel+Ext.swift */,
 				8272A03F2869680500ABFB8F /* String+Ext.swift */,
 				8272A04128696DE300ABFB8F /* NotificationName+Ext.swift */,
+				8272A04E2869D9F800ABFB8F /* Date+Ext.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -275,6 +292,8 @@
 			children = (
 				82A71C31286610D400919977 /* Launch.swift */,
 				8272A02D2868BDF200ABFB8F /* Rocket.swift */,
+				8272A04328698DDE00ABFB8F /* Links.swift */,
+				8272A04528698E5500ABFB8F /* Patch.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -293,6 +312,7 @@
 		82A71C332866147300919977 /* Custom */ = {
 			isa = PBXGroup;
 			children = (
+				8272A0472869983100ABFB8F /* ImageView */,
 				8272A03A28695DC800ABFB8F /* Gesture */,
 				8272A0312869342A00ABFB8F /* Label */,
 				8272A0262868B1D800ABFB8F /* Button */,
@@ -444,6 +464,7 @@
 			files = (
 				82391A4728689DE10026298A /* LaunchInfoViewModel.swift in Sources */,
 				82A71C362866150600919977 /* LaunchCollectionViewCell.swift in Sources */,
+				8272A04F2869D9F800ABFB8F /* Date+Ext.swift in Sources */,
 				8272A0372869393400ABFB8F /* UILabel+Ext.swift in Sources */,
 				82A71BFE2865F61500919977 /* LaunchListViewController.swift in Sources */,
 				82A71BFA2865F61500919977 /* AppDelegate.swift in Sources */,
@@ -453,21 +474,24 @@
 				8272A0332869344600ABFB8F /* HeaderLabel.swift in Sources */,
 				8272A04228696DE300ABFB8F /* NotificationName+Ext.swift in Sources */,
 				82A71C3A2867401600919977 /* NetworkManager.swift in Sources */,
+				8272A04428698DDE00ABFB8F /* Links.swift in Sources */,
 				82A71C32286610D400919977 /* Launch.swift in Sources */,
 				82A71C3E286818E000919977 /* TLCError.swift in Sources */,
 				8272A039286941DB00ABFB8F /* OptionTableViewCell.swift in Sources */,
 				8272A0282868B38900ABFB8F /* TLCButton.swift in Sources */,
-				8272A035286934B500ABFB8F /* SubHeaderLabel.swift in Sources */,
+				8272A035286934B500ABFB8F /* DetailLabel.swift in Sources */,
 				8272A03C28695DEF00ABFB8F /* SorterTapGestureRecognizer.swift in Sources */,
 				8272A0402869680500ABFB8F /* String+Ext.swift in Sources */,
 				8272A02A2868BB8A00ABFB8F /* RocketInfoViewController.swift in Sources */,
 				82391A4128682D660026298A /* TLCSeparatorView.swift in Sources */,
+				8272A04628698E5500ABFB8F /* Patch.swift in Sources */,
 				82A71C3828673FD600919977 /* ViewModelManager.swift in Sources */,
 				82391A432868836F0026298A /* URL+Ext.swift in Sources */,
 				8272A02C2868BD9400ABFB8F /* RocketInfoViewModel.swift in Sources */,
 				82391A45286893CD0026298A /* LaunchInfoViewController.swift in Sources */,
 				82A71BFC2865F61500919977 /* SceneDelegate.swift in Sources */,
 				8272A02E2868BDF200ABFB8F /* Rocket.swift in Sources */,
+				8272A0492869984E00ABFB8F /* TLCImageView.swift in Sources */,
 				82A71C4028681C2700919977 /* LaunchCellViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

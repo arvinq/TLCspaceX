@@ -166,7 +166,7 @@ extension LaunchListViewController: UICollectionViewDelegate, UICollectionViewDa
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let cellWidth = collectionView.frame.width * 0.9
-        let cellHeight = collectionView.frame.height * 0.05
+        let cellHeight = collectionView.frame.height * 0.1
         
         return CGSize(width: cellWidth, height: cellHeight)
     }

@@ -8,7 +8,7 @@ import UIKit
 /**
  Sub label for supplementary labels
  */
-class SubHeaderLabel: UILabel {
+class DetailLabel: UILabel {
 
     override init(frame: CGRect) {
         super.init(frame: frame)

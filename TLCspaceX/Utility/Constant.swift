@@ -29,6 +29,12 @@ enum Title {
     static let applyButton   = "Apply to Launch List"
 }
 
+enum StatusDescription {
+    static let success = "Successful Mission"
+    static let failure = "Failed Mission"
+    static let null    = "Pending Mission"
+}
+
 /// Constant values to be used for animations
 enum Animation {
     static let duration: CGFloat = 0.35

@@ -22,14 +22,14 @@ class FilterSortViewController: UIViewController {
         return stackView
     }()
     
-    lazy var missionNameLabel: SubHeaderLabel = {
-        let label = SubHeaderLabel(fontSize: FontSize.subHeader, fontColor: .tertiaryLabel)
+    lazy var missionNameLabel: DetailLabel = {
+        let label = DetailLabel(fontSize: FontSize.subHeader, fontColor: .tertiaryLabel)
         label.setImageAndText(usingImage: SFSymbol.alphabet!, andText: Title.missionName)
         return label
     }()
     
-    lazy var launchDateLabel: SubHeaderLabel = {
-        let label = SubHeaderLabel(fontSize: FontSize.subHeader, fontColor: .tertiaryLabel)
+    lazy var launchDateLabel: DetailLabel = {
+        let label = DetailLabel(fontSize: FontSize.subHeader, fontColor: .tertiaryLabel)
         label.setImageAndText(usingImage: SFSymbol.calendar!, andText: Title.launchDate)
         return label
     }()
@@ -160,7 +160,7 @@ class FilterSortViewController: UIViewController {
         
         // after resetting back the colors, apply a different color on the selected sort label
         guard let selectedLabel = sender.view as? UILabel else { return }
-        selectedLabel.textColor = .secondaryLabel
+        selectedLabel.textColor = .label
         
         viewModelManager?.sortDescriptor = sender.sortDescriptor ?? .launchDate
     }

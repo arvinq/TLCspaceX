@@ -12,11 +12,31 @@ class LaunchCollectionViewCell: UICollectionViewCell {
     // reuse identifier
     static let reuseId = "LaunchCollectionViewCell"
     
-    lazy var launchLabel: UILabel = {
-       let label = UILabel()
-        label.font = UIFont.systemFont(ofSize: 14.0, weight: .medium)
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
+    lazy var launchLabel: DetailLabel = {
+        return DetailLabel(fontSize: 14.0, fontColor: .label)
+    }()
+    
+    lazy var launchStatusLabel: DetailLabel = {
+        return DetailLabel(fontSize: 10, fontColor: .label)
+    }()
+    
+    lazy var launchDateLabel: DetailLabel = {
+        return DetailLabel(fontSize: 10, fontColor: .label)
+    }()
+    
+    lazy var cellDetailStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.alignment = .fill
+        stackView.distribution = .fillProportionally
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
+    lazy var patchImageView: TLCImageView = {
+        let imageView = TLCImageView(frame: .zero)
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
     }()
     
     lazy var separatorView: TLCSeparatorView = {
@@ -45,15 +65,25 @@ class LaunchCollectionViewCell: UICollectionViewCell {
     }
     
     private func setupView() {
-        addSubview(launchLabel)
+        addSubview(patchImageView)
+        addSubview(cellDetailStackView)
         addSubview(separatorView)
+        
+        cellDetailStackView.addArrangedSubview(launchLabel)
+        cellDetailStackView.addArrangedSubview(launchStatusLabel)
+        cellDetailStackView.addArrangedSubview(launchDateLabel)
     }
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            launchLabel.leadingAnchor.constraint(equalTo: leadingAnchor),
-            launchLabel.trailingAnchor.constraint(equalTo: trailingAnchor),
-            launchLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
+            patchImageView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            patchImageView.topAnchor.constraint(equalTo: topAnchor),
+            patchImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -Space.padding),
+            patchImageView.widthAnchor.constraint(equalToConstant: 80),
+            
+            cellDetailStackView.leadingAnchor.constraint(equalTo: patchImageView.trailingAnchor, constant: Space.adjacent),
+            cellDetailStackView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            cellDetailStackView.centerYAnchor.constraint(equalTo: centerYAnchor),
             
             separatorView.heightAnchor.constraint(equalToConstant: Size.separatorHeight),
             separatorView.widthAnchor.constraint(equalTo: widthAnchor),
@@ -62,6 +92,10 @@ class LaunchCollectionViewCell: UICollectionViewCell {
     }
     
     private func bindValues() {
+        self.patchImageView.downloadImage(from: launchViewModel?.smallPatch)
         self.launchLabel.text = launchViewModel?.name
+        self.launchStatusLabel.text = launchViewModel?.getLaunchStatus()
+        self.launchDateLabel.text = launchViewModel?.getLaunchDate()
+        
     }
 }

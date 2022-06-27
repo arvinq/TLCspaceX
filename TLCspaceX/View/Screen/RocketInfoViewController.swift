@@ -70,7 +70,6 @@ class RocketInfoViewController: UIViewController {
     
     lazy var rocketWikiButton: UIButton = {
         let button = UIButton()
-        button.setTitle(Title.getRocketWiki, for: .normal)
         button.setTitleColor(UIColor.label, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 14.0, weight: .medium)
         button.contentHorizontalAlignment = .left
@@ -218,6 +217,9 @@ class RocketInfoViewController: UIViewController {
                 self.rocketDescriptionLabel.text = rocketInfoViewModel?.description
                 self.rocketBoosterDetailsLabel.text = rocketInfoViewModel?.booster
                 self.rocketSuccessRateDetailsLabel.text = rocketInfoViewModel?.successRatePct
+                
+                let wikiButtonTitle = String(format: Title.getRocketWiki, rocketInfoViewModel?.name ?? "Rocket")
+                self.rocketWikiButton.setTitle(wikiButtonTitle, for: .normal)
             }
         }
         

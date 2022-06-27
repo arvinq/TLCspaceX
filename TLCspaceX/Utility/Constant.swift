@@ -22,12 +22,12 @@ enum Title {
     static let launchInfo    = "Launch Information"
     static let launchAlert   = "Launch"
     static let getRocket     = "View Rocket Info"
-    static let getRocketWiki = "Rocket Wiki"
+    static let getRocketWiki = "See %@ Wiki"
     static let rocketInfo    = "Rocket Information"
     static let rocketAlert   = "Rocket"
     static let sortAndFilter = "Sort | Filter"
-    static let sort          = "Sort by"
-    static let filter        = "Filter by"
+    static let sort          = "Sort"
+    static let filter        = "Filter by Mission Status"
     static let missionName   = "Mission Name"
     static let launchDate    = "Launch Date"
     static let filterButton  = "Select Filter"
@@ -80,8 +80,8 @@ enum Size {
 }
 
 enum FontSize {
-    static let header: CGFloat = 20.0
-    static let subHeader: CGFloat = 16.0
+    static let header: CGFloat = 16.0
+    static let subHeader: CGFloat = 14.0
 }
 
 /// Constant values that represents Spaces used in the app

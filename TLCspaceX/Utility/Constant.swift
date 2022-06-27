@@ -23,6 +23,7 @@ enum Title {
     static let launchAlert   = "Launch"
     static let getRocket     = "View Rocket details"
     static let getRocketWiki = "Rocket Wiki"
+    static let rocketInfo    = "Rocket Information"
     static let rocketAlert   = "Rocket"
     static let sortAndFilter = "Sort | Filter"
     static let sort          = "Sort by"

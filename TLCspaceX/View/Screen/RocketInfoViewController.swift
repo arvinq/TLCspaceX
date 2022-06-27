@@ -26,6 +26,11 @@ class RocketInfoViewController: UIViewController {
         return button
     }()
     
+    lazy var closeBarButtonItem: UIBarButtonItem = {
+        let barButtonItem = UIBarButtonItem(image: SFSymbol.close, style: .done, target: self, action: #selector(closePressed))
+        return barButtonItem
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()
@@ -40,7 +45,9 @@ class RocketInfoViewController: UIViewController {
     }
     
     private func setupView() {
+        title = Title.rocketInfo
         view.backgroundColor = .systemBackground
+        navigationItem.setLeftBarButton(closeBarButtonItem, animated: true)
         
         view.addSubview(activityIndicator)
         view.addSubview(rocketWikiButton)
@@ -61,10 +68,9 @@ class RocketInfoViewController: UIViewController {
     private func setupViewModel() {
         viewModelManager.bindRocketInformation = { [weak self] rocketInfoViewModel in
             guard let self = self else { return }
-            self.rocketInfoViewModel = rocketInfoViewModel
             
             DispatchQueue.main.async {
-                self.title = rocketInfoViewModel?.name
+                self.rocketInfoViewModel = rocketInfoViewModel
             }
         }
         
@@ -114,5 +120,10 @@ class RocketInfoViewController: UIViewController {
         }
         
         showSafariWebView(on: wikipediaURL)
+    }
+    
+    @objc
+    private func closePressed() {
+        dismiss(animated: true)
     }
 }

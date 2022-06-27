@@ -65,6 +65,11 @@ class LaunchInfoViewController: UIViewController {
         return TLCImageView(frame: .zero)
     }()
     
+    lazy var closeBarButtonItem: UIBarButtonItem = {
+        let barButtonItem = UIBarButtonItem(image: SFSymbol.close, style: .done, target: self, action: #selector(closePressed))
+        return barButtonItem
+    }()
+    
     lazy var firstSeparatorView: TLCSeparatorView = { return TLCSeparatorView() }()
     lazy var secondSeparatorView: TLCSeparatorView = { return TLCSeparatorView() }()
     lazy var thirdSeparatorView: TLCSeparatorView = { return TLCSeparatorView() }()
@@ -104,6 +109,7 @@ class LaunchInfoViewController: UIViewController {
     private func setupView() {
         title = Title.launchInfo
         view.backgroundColor = .systemBackground
+        navigationItem.setLeftBarButton(closeBarButtonItem, animated: true)
         
         view.addSubview(launchNameLabel)
         
@@ -260,4 +266,10 @@ class LaunchInfoViewController: UIViewController {
         let tempNavigationController = UINavigationController(rootViewController: rocketInfoViewController)
         present(tempNavigationController, animated: true)
     }
+    
+    @objc
+    private func closePressed() {
+        dismiss(animated: true)
+    }
+    
 }

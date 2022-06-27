@@ -29,6 +29,11 @@ class LaunchListViewController: UIViewController {
         return activityIndicator
     }()
     
+    lazy var filterSortBarButtonItem: UIBarButtonItem = {
+        let barButtonItem = UIBarButtonItem(image: SFSymbol.filterSort, style: .plain, target: self, action: #selector(filterSortPressed))
+        return barButtonItem
+    }()
+    
     lazy var viewModelManager: ViewModelManager = {
        return ViewModelManager()
     }()
@@ -50,6 +55,7 @@ class LaunchListViewController: UIViewController {
     private func setupView() {
         view.backgroundColor = .systemBackground
         title = Title.launchList
+        navigationItem.setRightBarButton(filterSortBarButtonItem, animated: true)
         
         view.addSubview(activityIndicator)
         view.addSubview(launchCollectionView)
@@ -107,6 +113,14 @@ class LaunchListViewController: UIViewController {
             }
         }
 
+    }
+    
+    /// Show filter and sort view controller
+    @objc
+    private func filterSortPressed() {
+        let filterSortViewController = FilterSortViewController()
+        let tempNavigationController = UINavigationController(rootViewController: filterSortViewController)
+        present(tempNavigationController, animated: true)
     }
 }
 

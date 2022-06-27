@@ -27,6 +27,4 @@ class TLCButton: UIButton {
         titleLabel?.font = UIFont.preferredFont(forTextStyle: .headline)
         translatesAutoresizingMaskIntoConstraints = false
     }
-    
-    
 }

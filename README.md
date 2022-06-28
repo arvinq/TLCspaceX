@@ -28,11 +28,11 @@ Filtering and sorting is a combined feature so when the user filter mission's st
 
 Pull down refresh will fetch a fresh set of list and removing the filtered / sorted list if there is any.
 
-## Limitation
-Apparently, the grouping of data when sorted (by alphabet and by year) is still on wip. The setup sections and headers is already functional but applying the compositional layout to use the header breaks the UI. Looking to resolve soon but submitting now as discussed with Jack.
-
 ## Screenshot
 ![TLCSpaceX](screen.png)
+
+## Limitation
+The grouping of data when sorted (by alphabet and by year) is still a wip. The setup of sections and headers is already functional but applying the compositional layout to use the header breaks the UI. Looking to resolve soon but submitting now as discussed with Jack.
 
 ## License
 Project is under the MIT License. Please see the [LICENSE](https://github.com/arvinq/TLCspaceX/blob/main/LICENSE) file for more information.

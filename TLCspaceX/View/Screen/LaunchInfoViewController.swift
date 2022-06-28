@@ -275,7 +275,7 @@ class LaunchInfoViewController: UIViewController {
                 if isLoading {
                     self.activityIndicator.startAnimating()
                     UIView.animate(withDuration: Animation.duration) {
-                        self.view.alpha = Alpha.weakFade
+                        self.view.alpha = Alpha.strongFade
                     }
                 } else {
                     self.activityIndicator.stopAnimating()

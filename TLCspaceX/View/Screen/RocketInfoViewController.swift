@@ -14,6 +14,10 @@ class RocketInfoViewController: UIViewController {
        return ViewModelManager()
     }()
     
+    // Containers
+    lazy var scrollView: UIScrollView = { return UIScrollView() }()
+    lazy var contentView: UIView = { return UIView() }()
+    
     lazy var rocketImageView: TLCImageView = {
         return TLCImageView(frame: .zero)
     }()
@@ -71,6 +75,7 @@ class RocketInfoViewController: UIViewController {
     lazy var rocketWikiButton: UIButton = {
         let button = UIButton()
         button.setTitleColor(UIColor.label, for: .normal)
+        button.setTitle(Title.getRocketWiki, for: .normal)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 14.0, weight: .medium)
         button.contentHorizontalAlignment = .left
         button.addTarget(self, action: #selector(rocketWikiButtonTapped), for: .touchUpInside)
@@ -112,94 +117,103 @@ class RocketInfoViewController: UIViewController {
         view.backgroundColor = .systemBackground
         navigationItem.setLeftBarButton(closeBarButtonItem, animated: true)
         
-        view.addSubview(rocketNameLabel)
-        view.addSubview(rocketImageView)
-        view.addSubview(companyNameLabel)
-        view.addSubview(activityIndicator)
+        view.addSubview(scrollView)
+        scrollView.addSubview(contentView)
         
-        view.addSubview(rocketDescriptionCaption)
-        view.addSubview(rocketDescriptionLabel)
+        contentView.addSubview(rocketNameLabel)
+        contentView.addSubview(rocketImageView)
+        contentView.addSubview(companyNameLabel)
+        contentView.addSubview(activityIndicator)
         
-        view.addSubview(rocketBoosterDetailsCaption)
-        view.addSubview(rocketBoosterDetailsLabel)
-        view.addSubview(rocketSuccessRateDetailsCaption)
-        view.addSubview(rocketSuccessRateDetailsLabel)
+        contentView.addSubview(rocketDescriptionCaption)
+        contentView.addSubview(rocketDescriptionLabel)
         
-        view.addSubview(rocketWikiButton)
-        view.addSubview(chevronImageView)
+        contentView.addSubview(rocketBoosterDetailsCaption)
+        contentView.addSubview(rocketBoosterDetailsLabel)
+        contentView.addSubview(rocketSuccessRateDetailsCaption)
+        contentView.addSubview(rocketSuccessRateDetailsLabel)
+        
+        contentView.addSubview(rocketWikiButton)
+        contentView.addSubview(chevronImageView)
         
         // separators
-        view.addSubview(firstSeparatorView)
-        view.addSubview(secondSeparatorView)
-        view.addSubview(thirdSeparatorView)
-        view.addSubview(fourthSeparatorView)
+        contentView.addSubview(firstSeparatorView)
+        contentView.addSubview(secondSeparatorView)
+        contentView.addSubview(thirdSeparatorView)
+        contentView.addSubview(fourthSeparatorView)
     }
     
     private func setupConstraints() {
+        scrollView.pinToEdges(of: view)
+        contentView.pinToEdges(of: scrollView)
+        
         NSLayoutConstraint.activate([
-            activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
+            contentView.heightAnchor.constraint(equalToConstant: 700),
             
-            rocketImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            rocketImageView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            rocketImageView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.35),
+            activityIndicator.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             
-            rocketNameLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: Space.margin),
-            rocketNameLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            rocketImageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            rocketImageView.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor),
+            rocketImageView.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.35),
+            
+            rocketNameLabel.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor, constant: Space.margin),
+            rocketNameLabel.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor),
             rocketNameLabel.topAnchor.constraint(equalTo: rocketImageView.bottomAnchor, constant: Space.adjacent),
             
-            companyNameLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: Space.margin),
-            companyNameLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            companyNameLabel.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor, constant: Space.margin),
+            companyNameLabel.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor),
             companyNameLabel.topAnchor.constraint(equalTo: rocketNameLabel.bottomAnchor, constant: Space.sameGroupAdjacent),
             
-            firstSeparatorView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
-            firstSeparatorView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            firstSeparatorView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.9),
+            firstSeparatorView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             firstSeparatorView.heightAnchor.constraint(equalToConstant: Size.separatorHeight),
             firstSeparatorView.topAnchor.constraint(equalTo: companyNameLabel.bottomAnchor, constant: Space.adjacent),
             
-            rocketDescriptionCaption.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: Space.margin),
-            rocketDescriptionCaption.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -Space.margin),
+            rocketDescriptionCaption.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor, constant: Space.margin),
+            rocketDescriptionCaption.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor, constant: -Space.margin),
             rocketDescriptionCaption.topAnchor.constraint(equalTo: firstSeparatorView.bottomAnchor, constant: Space.adjacent),
             
-            rocketDescriptionLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: Space.margin),
-            rocketDescriptionLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -Space.margin),
+            rocketDescriptionLabel.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor, constant: Space.margin),
+            rocketDescriptionLabel.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor, constant: -Space.margin),
             rocketDescriptionLabel.topAnchor.constraint(equalTo: rocketDescriptionCaption.bottomAnchor),
             
-            secondSeparatorView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
-            secondSeparatorView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            secondSeparatorView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.9),
+            secondSeparatorView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             secondSeparatorView.heightAnchor.constraint(equalToConstant: Size.separatorHeight),
             secondSeparatorView.topAnchor.constraint(equalTo: rocketDescriptionLabel.bottomAnchor, constant: Space.adjacent),
             
-            rocketBoosterDetailsCaption.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: Space.margin),
-            rocketBoosterDetailsCaption.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -Space.margin),
+            rocketBoosterDetailsCaption.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor, constant: Space.margin),
+            rocketBoosterDetailsCaption.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor, constant: -Space.margin),
             rocketBoosterDetailsCaption.topAnchor.constraint(equalTo: secondSeparatorView.bottomAnchor, constant: Space.adjacent),
             
-            rocketBoosterDetailsLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: Space.margin),
-            rocketBoosterDetailsLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -Space.margin),
+            rocketBoosterDetailsLabel.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor, constant: Space.margin),
+            rocketBoosterDetailsLabel.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor, constant: -Space.margin),
             rocketBoosterDetailsLabel.topAnchor.constraint(equalTo: rocketBoosterDetailsCaption.bottomAnchor),
             
-            rocketSuccessRateDetailsCaption.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: Space.margin),
-            rocketSuccessRateDetailsCaption.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -Space.margin),
+            rocketSuccessRateDetailsCaption.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor, constant: Space.margin),
+            rocketSuccessRateDetailsCaption.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor, constant: -Space.margin),
             rocketSuccessRateDetailsCaption.topAnchor.constraint(equalTo: rocketBoosterDetailsLabel.bottomAnchor, constant: Space.adjacent),
             
-            rocketSuccessRateDetailsLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: Space.margin),
-            rocketSuccessRateDetailsLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -Space.margin),
+            rocketSuccessRateDetailsLabel.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor, constant: Space.margin),
+            rocketSuccessRateDetailsLabel.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor, constant: -Space.margin),
             rocketSuccessRateDetailsLabel.topAnchor.constraint(equalTo: rocketSuccessRateDetailsCaption.bottomAnchor),
             
-            thirdSeparatorView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
-            thirdSeparatorView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            thirdSeparatorView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.9),
+            thirdSeparatorView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             thirdSeparatorView.heightAnchor.constraint(equalToConstant: Size.separatorHeight),
             thirdSeparatorView.topAnchor.constraint(equalTo: rocketSuccessRateDetailsLabel.bottomAnchor, constant: Space.adjacent),
             
             rocketWikiButton.topAnchor.constraint(equalTo: thirdSeparatorView.bottomAnchor, constant: Space.adjacent),
-            rocketWikiButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: Space.margin),
-            rocketWikiButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            rocketWikiButton.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor, constant: Space.margin),
+            rocketWikiButton.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor),
             
-            chevronImageView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -Space.margin),
+            chevronImageView.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor, constant: -Space.margin),
             chevronImageView.centerYAnchor.constraint(equalTo: rocketWikiButton.centerYAnchor),
             
-            fourthSeparatorView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
-            fourthSeparatorView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            fourthSeparatorView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.9),
+            fourthSeparatorView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             fourthSeparatorView.heightAnchor.constraint(equalToConstant: Size.separatorHeight),
             fourthSeparatorView.topAnchor.constraint(equalTo: rocketWikiButton.bottomAnchor, constant: Space.adjacent),
         ])
@@ -217,9 +231,6 @@ class RocketInfoViewController: UIViewController {
                 self.rocketDescriptionLabel.text = rocketInfoViewModel?.description
                 self.rocketBoosterDetailsLabel.text = rocketInfoViewModel?.booster
                 self.rocketSuccessRateDetailsLabel.text = rocketInfoViewModel?.successRatePct
-                
-                let wikiButtonTitle = String(format: Title.getRocketWiki, rocketInfoViewModel?.name ?? "Rocket")
-                self.rocketWikiButton.setTitle(wikiButtonTitle, for: .normal)
             }
         }
         

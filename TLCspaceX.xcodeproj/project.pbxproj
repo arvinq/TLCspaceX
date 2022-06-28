@@ -31,6 +31,7 @@
 		8272A053286A435000ABFB8F /* Diameter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8272A052286A435000ABFB8F /* Diameter.swift */; };
 		8272A055286A437000ABFB8F /* Mass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8272A054286A437000ABFB8F /* Mass.swift */; };
 		8272A057286A449500ABFB8F /* Engines.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8272A056286A449500ABFB8F /* Engines.swift */; };
+		8272A059286A5C8A00ABFB8F /* UIView+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8272A058286A5C8A00ABFB8F /* UIView+Ext.swift */; };
 		82A71BFA2865F61500919977 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A71BF92865F61500919977 /* AppDelegate.swift */; };
 		82A71BFC2865F61500919977 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A71BFB2865F61500919977 /* SceneDelegate.swift */; };
 		82A71BFE2865F61500919977 /* LaunchListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A71BFD2865F61500919977 /* LaunchListViewController.swift */; };
@@ -92,6 +93,7 @@
 		8272A052286A435000ABFB8F /* Diameter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Diameter.swift; sourceTree = "<group>"; };
 		8272A054286A437000ABFB8F /* Mass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mass.swift; sourceTree = "<group>"; };
 		8272A056286A449500ABFB8F /* Engines.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Engines.swift; sourceTree = "<group>"; };
+		8272A058286A5C8A00ABFB8F /* UIView+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+Ext.swift"; sourceTree = "<group>"; };
 		82A71BF62865F61500919977 /* TLCspaceX.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TLCspaceX.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		82A71BF92865F61500919977 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		82A71BFB2865F61500919977 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -242,6 +244,7 @@
 				8272A03F2869680500ABFB8F /* String+Ext.swift */,
 				8272A04128696DE300ABFB8F /* NotificationName+Ext.swift */,
 				8272A04E2869D9F800ABFB8F /* Date+Ext.swift */,
+				8272A058286A5C8A00ABFB8F /* UIView+Ext.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -506,6 +509,7 @@
 				8272A02C2868BD9400ABFB8F /* RocketInfoViewModel.swift in Sources */,
 				82391A45286893CD0026298A /* LaunchInfoViewController.swift in Sources */,
 				82A71BFC2865F61500919977 /* SceneDelegate.swift in Sources */,
+				8272A059286A5C8A00ABFB8F /* UIView+Ext.swift in Sources */,
 				8272A02E2868BDF200ABFB8F /* Rocket.swift in Sources */,
 				8272A0492869984E00ABFB8F /* TLCImageView.swift in Sources */,
 				82A71C4028681C2700919977 /* LaunchCellViewModel.swift in Sources */,

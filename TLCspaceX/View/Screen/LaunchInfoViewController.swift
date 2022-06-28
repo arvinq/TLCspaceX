@@ -14,6 +14,10 @@ class LaunchInfoViewController: UIViewController {
        return ViewModelManager()
     }()
     
+    // Containers
+    lazy var scrollView: UIScrollView = { return UIScrollView() }()
+    lazy var contentView: UIView = { return UIView() }()
+    
     lazy var launchNameLabel: DetailLabel = {
         let label = DetailLabel(fontSize: 16.0, fontColor: .label)
         return label
@@ -118,108 +122,120 @@ class LaunchInfoViewController: UIViewController {
         view.backgroundColor = .systemBackground
         navigationItem.setLeftBarButton(closeBarButtonItem, animated: true)
         
-        view.addSubview(launchNameLabel)
+        view.addSubview(scrollView)
+        scrollView.addSubview(contentView)
         
-        view.addSubview(launchDetailsCaption)
-        view.addSubview(launchDetailsLabel)
+        contentView.addSubview(launchNameLabel)
         
-        view.addSubview(launchDateCaption)
-        view.addSubview(launchDateLabel)
+        contentView.addSubview(launchDetailsCaption)
+        contentView.addSubview(launchDetailsLabel)
         
-        view.addSubview(launchStatusCaption)
-        view.addSubview(launchStatusLabel)
+        contentView.addSubview(launchDateCaption)
+        contentView.addSubview(launchDateLabel)
         
-        view.addSubview(activityIndicator)
-        view.addSubview(rocketButton)
-        view.addSubview(chevronImageView)
+        contentView.addSubview(launchStatusCaption)
+        contentView.addSubview(launchStatusLabel)
         
-        view.addSubview(launchPatchsCaption)
-        view.addSubview(launchThumbnailImageView)
+        contentView.addSubview(activityIndicator)
+        contentView.addSubview(rocketButton)
+        contentView.addSubview(chevronImageView)
+        
+        contentView.addSubview(launchPatchsCaption)
+        contentView.addSubview(launchThumbnailImageView)
         
         // separators
-        view.addSubview(firstSeparatorView)
-        view.addSubview(secondSeparatorView)
-        view.addSubview(thirdSeparatorView)
-        view.addSubview(fourthSeparatorView)
-        view.addSubview(fifthSeparatorView)
-        view.addSubview(sixthSeparatorView)
+        contentView.addSubview(firstSeparatorView)
+        contentView.addSubview(secondSeparatorView)
+        contentView.addSubview(thirdSeparatorView)
+        contentView.addSubview(fourthSeparatorView)
+        contentView.addSubview(fifthSeparatorView)
+        contentView.addSubview(sixthSeparatorView)
     }
     
     private func setupConstraints() {
+        scrollView.pinToEdges(of: view)
+        contentView.pinToEdges(of: scrollView)
+        
         NSLayoutConstraint.activate([
-            activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            // we need to set contentView's width and height in addition to pinning it
+            // to scrollView's edges so that we can make it movable inside scrollView.
+            // This will greatly take into effect should our content becomes large enough.
+            contentView.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
+            contentView.heightAnchor.constraint(equalToConstant: 700),
             
-            launchNameLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: Space.margin),
-            launchNameLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            launchNameLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            activityIndicator.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: contentView.centerYAnchor),
             
-            firstSeparatorView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
-            firstSeparatorView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            launchNameLabel.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor, constant: Space.margin),
+            launchNameLabel.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor),
+            launchNameLabel.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor),
+            
+            firstSeparatorView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.9),
+            firstSeparatorView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             firstSeparatorView.heightAnchor.constraint(equalToConstant: Size.separatorHeight),
             firstSeparatorView.topAnchor.constraint(equalTo: launchNameLabel.bottomAnchor, constant: Space.adjacent),
             
-            launchDetailsCaption.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: Space.margin),
-            launchDetailsCaption.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -Space.margin),
+            launchDetailsCaption.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor, constant: Space.margin),
+            launchDetailsCaption.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor, constant: -Space.margin),
             launchDetailsCaption.topAnchor.constraint(equalTo: firstSeparatorView.bottomAnchor, constant: Space.adjacent),
             
-            launchDetailsLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: Space.margin),
-            launchDetailsLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -Space.margin),
+            launchDetailsLabel.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor, constant: Space.margin),
+            launchDetailsLabel.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor, constant: -Space.margin),
             launchDetailsLabel.topAnchor.constraint(equalTo: launchDetailsCaption.bottomAnchor),
             
-            secondSeparatorView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
-            secondSeparatorView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            secondSeparatorView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.9),
+            secondSeparatorView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             secondSeparatorView.heightAnchor.constraint(equalToConstant: Size.separatorHeight),
             secondSeparatorView.topAnchor.constraint(equalTo: launchDetailsLabel.bottomAnchor, constant: Space.adjacent),
             
-            launchDateCaption.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: Space.margin),
-            launchDateCaption.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -Space.margin),
+            launchDateCaption.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor, constant: Space.margin),
+            launchDateCaption.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor, constant: -Space.margin),
             launchDateCaption.topAnchor.constraint(equalTo: secondSeparatorView.bottomAnchor, constant: Space.adjacent),
             
-            launchDateLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: Space.margin),
-            launchDateLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -Space.margin),
+            launchDateLabel.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor, constant: Space.margin),
+            launchDateLabel.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor, constant: -Space.margin),
             launchDateLabel.topAnchor.constraint(equalTo: launchDateCaption.bottomAnchor),
             
-            thirdSeparatorView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
-            thirdSeparatorView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            thirdSeparatorView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.9),
+            thirdSeparatorView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             thirdSeparatorView.heightAnchor.constraint(equalToConstant: Size.separatorHeight),
             thirdSeparatorView.topAnchor.constraint(equalTo: launchDateLabel.bottomAnchor, constant: Space.adjacent),
             
-            launchStatusCaption.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: Space.margin),
-            launchStatusCaption.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -Space.margin),
+            launchStatusCaption.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor, constant: Space.margin),
+            launchStatusCaption.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor, constant: -Space.margin),
             launchStatusCaption.topAnchor.constraint(equalTo: thirdSeparatorView.bottomAnchor, constant: Space.adjacent),
             
-            launchStatusLabel.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: Space.margin),
-            launchStatusLabel.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -Space.margin),
+            launchStatusLabel.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor, constant: Space.margin),
+            launchStatusLabel.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor, constant: -Space.margin),
             launchStatusLabel.topAnchor.constraint(equalTo: launchStatusCaption.bottomAnchor),
             
-            fourthSeparatorView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
-            fourthSeparatorView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            fourthSeparatorView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.9),
+            fourthSeparatorView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             fourthSeparatorView.heightAnchor.constraint(equalToConstant: Size.separatorHeight),
             fourthSeparatorView.topAnchor.constraint(equalTo: launchStatusLabel.bottomAnchor, constant: Space.adjacent),
             
             rocketButton.topAnchor.constraint(equalTo: fourthSeparatorView.bottomAnchor, constant: Space.adjacent),
-            rocketButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: Space.margin),
-            rocketButton.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            rocketButton.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor, constant: Space.margin),
+            rocketButton.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor),
             
-            chevronImageView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -Space.margin),
+            chevronImageView.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor, constant: -Space.margin),
             chevronImageView.centerYAnchor.constraint(equalTo: rocketButton.centerYAnchor),
             
-            fifthSeparatorView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
-            fifthSeparatorView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            fifthSeparatorView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.9),
+            fifthSeparatorView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             fifthSeparatorView.heightAnchor.constraint(equalToConstant: Size.separatorHeight),
             fifthSeparatorView.topAnchor.constraint(equalTo: rocketButton.bottomAnchor, constant: Space.adjacent),
 
-            launchPatchsCaption.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: Space.margin),
-            launchPatchsCaption.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor, constant: -Space.margin),
+            launchPatchsCaption.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor, constant: Space.margin),
+            launchPatchsCaption.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor, constant: -Space.margin),
             launchPatchsCaption.topAnchor.constraint(equalTo: fifthSeparatorView.bottomAnchor, constant: Space.adjacent),
             
-            launchThumbnailImageView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            launchThumbnailImageView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             launchThumbnailImageView.topAnchor.constraint(equalTo: launchPatchsCaption.bottomAnchor, constant: Space.adjacent),
-            launchThumbnailImageView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.35),
+            launchThumbnailImageView.heightAnchor.constraint(equalTo: contentView.heightAnchor, multiplier: 0.35),
             
-            sixthSeparatorView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
-            sixthSeparatorView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            sixthSeparatorView.widthAnchor.constraint(equalTo: contentView.widthAnchor, multiplier: 0.9),
+            sixthSeparatorView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
             sixthSeparatorView.heightAnchor.constraint(equalToConstant: Size.separatorHeight),
             sixthSeparatorView.topAnchor.constraint(equalTo: launchThumbnailImageView.bottomAnchor, constant: Space.adjacent),
         ])

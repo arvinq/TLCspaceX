@@ -21,10 +21,12 @@ Nevertheless, the fetching and loading of the launch list is relatively quick be
 ## Assumptions
 When sorting by date, I have it sorted from latest to earliest as I believe user's would want to checkout what the upcoming missions instead of checking out the past missions.
 
-Pull down refresh will fetch a fresh set of list and removing the filtered / sorted list if there is any.
+Getting all mission launches from the API will already return the whole Launch properties that should be feasible to populate Launch Info. I would assume just assigning the viewModel from list to info will eliminate the need to execute another API call. However, since one of the requirement needs to use One Launch, we have to pass the id instead from list to info and execute a fetch on One Launch endpoint to satisfy the requirement.
 
 ## Additional Bits
 Filtering and sorting is a combined feature so when the user filter mission's status and sort it, it still works. As oppose to having a separate sorting and filtering feature that acts on the list.
+
+Pull down refresh will fetch a fresh set of list and removing the filtered / sorted list if there is any.
 
 ## Limitation
 Apparently, the grouping of data when sorted (by alphabet and by year) is still on wip but submitting now as discussed with Jack.

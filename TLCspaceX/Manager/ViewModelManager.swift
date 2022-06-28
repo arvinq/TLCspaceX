@@ -59,16 +59,6 @@ class ViewModelManager {
     }
     
     /**
-     * Returns an individual launch view model at a given index in the array.
-     *  - Parameters:
-     *      - index: integer passed that represents the location of the launch in the list
-     *      - isFiltered: bool value to indicate on what list we will get the viewModel
-     */
-    func getLaunchCellViewModel(on index: Int, isFiltered: Bool) -> LaunchCellViewModel {
-        return isFiltered ? filteredLaunchViewModels[index] : launchCellViewModels[index]
-    }
-    
-    /**
      * Main entry point that communicates with NetworkManager to fetch the launches and trigger an update to the collectionView
      */
     func getLaunches() {
@@ -89,6 +79,9 @@ class ViewModelManager {
         }
     }
     
+    /**
+     * Fetch one launch using the passed launch id
+     */
     func getOneLaunch(for launchId: String) {
         self.isLoading = true
         self.networkManager.getLaunchInfo(for: launchId) { [weak self] result in
@@ -104,6 +97,9 @@ class ViewModelManager {
         }
     }
     
+    /**
+     * Fetch one rocket using the passed rocket id
+     */
     func getOneRocket(for rocketId: String) {
         self.isLoading = true
         self.networkManager.getRocketInfo(for: rocketId) { [weak self] result in
@@ -158,10 +154,5 @@ class ViewModelManager {
         
         filteredLaunchViewModels = launchCellViewModels.filter { $0.success == compareStatus }
         sortLaunchList()
-    }
-    
-    /// Returns our viewModel list based on the app's status if filtered is applied or not.
-    func getLaunchViewModels(isFiltered: Bool) -> [LaunchCellViewModel] {
-        return isFiltered ? filteredLaunchViewModels : launchCellViewModels
     }
 }

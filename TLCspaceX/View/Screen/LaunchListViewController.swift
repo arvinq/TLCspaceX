@@ -7,8 +7,12 @@ import UIKit
 
 class LaunchListViewController: UIViewController {
 
-    //MARK: - Property Declaration
+    /// sole section to be used in our diffable data source
+    enum Section { case main }
     
+    var datasource: UICollectionViewDiffableDataSource<Section, LaunchCellViewModel>!
+    
+    //MARK: - Property Declaration
     lazy var launchCollectionView: UICollectionView = {
         let collectionViewLayout = UICollectionViewFlowLayout()
         collectionViewLayout.scrollDirection = .vertical
@@ -16,7 +20,6 @@ class LaunchListViewController: UIViewController {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: collectionViewLayout)
         collectionView.register(LaunchCollectionViewCell.self, forCellWithReuseIdentifier: LaunchCollectionViewCell.reuseId)
         collectionView.delegate = self
-        collectionView.dataSource = self
         collectionView.backgroundColor = .clear
         collectionView.alwaysBounceVertical = true
         collectionView.translatesAutoresizingMaskIntoConstraints = false
@@ -56,6 +59,7 @@ class LaunchListViewController: UIViewController {
         setupView()
         setupConstraint()
         setupViewModel()
+        setupDatasource()
         setupObserver()
         
         // fetch the launches and setup into our collectionView
@@ -100,7 +104,7 @@ class LaunchListViewController: UIViewController {
         viewModelManager.reloadCollection = { [weak self] in
             guard let self = self else { return }
             DispatchQueue.main.async {
-                self.launchCollectionView.reloadData()
+                self.updateData(using: self.viewModelManager.getUnfilteredLaunches())
             }
         }
         
@@ -129,8 +133,9 @@ class LaunchListViewController: UIViewController {
         NotificationCenter.default.addObserver(forName: .TLCApplyFilterAndSort, object: nil, queue: nil) { [weak self] notification in
             guard let self = self else { return }
             
-            self.isFiltered = true
-            DispatchQueue.main.async { self.launchCollectionView.reloadData() }
+            DispatchQueue.main.async {
+                self.updateData(using: self.viewModelManager.getFilteredLaunches())
+            }
         }
     }
     
@@ -146,22 +151,38 @@ class LaunchListViewController: UIViewController {
         let filterSortViewController = FilterSortViewController()
         let tempNavigationController = UINavigationController(rootViewController: filterSortViewController)
 
+        // resetting our filtered launches when we navigate to filter|sort view
+        viewModelManager.setInitialFilteredLaunches()
         filterSortViewController.viewModelManager = viewModelManager
         
         present(tempNavigationController, animated: true)
     }
 }
 
-extension LaunchListViewController: UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        let launchViewModels = viewModelManager.getLaunchViewModels(isFiltered: isFiltered)
-        return launchViewModels.count
+extension LaunchListViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+    
+    //MARK: - DataSource and Snapshot Configuration
+    
+    /// Initialize our data source. We also setup our custom cell to be used in our collection view referenced by the data source
+    func setupDatasource() {
+        datasource = UICollectionViewDiffableDataSource<Section, LaunchCellViewModel>(collectionView: launchCollectionView, cellProvider: { (collectionView, indexpath, launchCellViewModel) -> UICollectionViewCell? in
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: LaunchCollectionViewCell.reuseId, for: indexpath) as! LaunchCollectionViewCell
+            cell.launchViewModel = launchCellViewModel
+            return cell
+        })
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let launchCell = collectionView.dequeueReusableCell(withReuseIdentifier: LaunchCollectionViewCell.reuseId, for: indexPath) as! LaunchCollectionViewCell
-        launchCell.launchViewModel = viewModelManager.getLaunchCellViewModel(on: indexPath.item, isFiltered: isFiltered)
-        return launchCell
+    /**
+     * Create and apply a diff onto the snapshot using our current datasource and the list passed.
+     *
+     * - Parameters:
+     *   - launchList: list to diff our current launch list to
+     */
+    func updateData(using launchList: [LaunchCellViewModel]) {
+        var snapshot = NSDiffableDataSourceSnapshot<Section, LaunchCellViewModel>()
+        snapshot.appendSections([.main])
+        snapshot.appendItems(launchList)
+        datasource.apply(snapshot, animatingDifferences: true)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -173,7 +194,9 @@ extension LaunchListViewController: UICollectionViewDelegate, UICollectionViewDa
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let launchInfoViewController = LaunchInfoViewController()
-        let launchCellViewModel = viewModelManager.getLaunchCellViewModel(on: indexPath.item, isFiltered: isFiltered)
+        
+        // Get our view model in the datasource pointed to by the selected indexPath
+        guard let launchCellViewModel = datasource.itemIdentifier(for: indexPath) else { return }
         launchInfoViewController.launchId = launchCellViewModel.id
         
         let tempNavigationController = UINavigationController(rootViewController: launchInfoViewController)

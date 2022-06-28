@@ -119,6 +119,14 @@ class ViewModelManager {
         }
     }
     
+    func getUnfilteredLaunches() -> [LaunchCellViewModel] {
+        return launchCellViewModels
+    }
+    
+    func getFilteredLaunches() -> [LaunchCellViewModel] {
+        return filteredLaunchViewModels
+    }
+    
     func setInitialFilteredLaunches() {
         filteredLaunchViewModels = launchCellViewModels
     }

@@ -5,7 +5,7 @@
 
 import Foundation
 
-struct LaunchCellViewModel {
+struct LaunchCellViewModel: Hashable {
     let name: String
     let id: String
     let launchDate: Date

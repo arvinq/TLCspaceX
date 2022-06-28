@@ -29,7 +29,7 @@ Filtering and sorting is a combined feature so when the user filter mission's st
 Pull down refresh will fetch a fresh set of list and removing the filtered / sorted list if there is any.
 
 ## Limitation
-Apparently, the grouping of data when sorted (by alphabet and by year) is still on wip. The setup sections and headers is already functional but applying the compositional layout to use the header breaks the UI so submitting now as discussed with Jack.
+Apparently, the grouping of data when sorted (by alphabet and by year) is still on wip. The setup sections and headers is already functional but applying the compositional layout to use the header breaks the UI. Looking to resolve soon but submitting now as discussed with Jack.
 
 ## Screenshot
 ![TLCSpaceX](screen.png)

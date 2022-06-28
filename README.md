@@ -21,11 +21,13 @@ Nevertheless, the fetching and loading of the launch list is relatively quick be
 ## Assumptions
 When sorting by date, I have it sorted from latest to earliest as I believe user's would want to checkout what the upcoming missions instead of checking out the past missions.
 
+Pull down refresh will fetch a fresh set of list and removing the filtered / sorted list if there is any.
+
 ## Additional Bits
 Filtering and sorting is a combined feature so when the user filter mission's status and sort it, it still works. As oppose to having a separate sorting and filtering feature that acts on the list.
 
 ## Limitation
-Apparently, the grouping of data when sorted (by alphabet and by year) is still on wip but submitting now as discussed with agent.
+Apparently, the grouping of data when sorted (by alphabet and by year) is still on wip but submitting now as discussed with Jack.
 
 ## Screenshot
 ![TLCSpaceX](screen.png)

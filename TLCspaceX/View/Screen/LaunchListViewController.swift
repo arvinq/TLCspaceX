@@ -47,9 +47,7 @@ class LaunchListViewController: UIViewController {
     lazy var viewModelManager: ViewModelManager = {
        return ViewModelManager()
     }()
-    
-    var isFiltered: Bool = false
-    
+        
     override func viewDidLoad() {
         super.viewDidLoad()
         setup()

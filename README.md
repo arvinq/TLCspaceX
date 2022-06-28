@@ -19,7 +19,7 @@ Although the data is not that big, at first I planned to have a pagination query
 Nevertheless, the fetching and loading of the launch list is relatively quick because of the amount of data being fetch.
 
 ## Screenshot
-
+![TLCSpaceX](screen.png)
 
 ## License
 Project is under the MIT License. Please see the [LICENSE](https://github.com/arvinq/TLCspaceX/blob/main/LICENSE) file for more information.

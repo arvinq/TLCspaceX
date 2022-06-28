@@ -26,12 +26,12 @@ enum Title {
     static let rocketInfo    = "Rocket Information"
     static let rocketAlert   = "Rocket"
     static let sortAndFilter = "Sort | Filter"
-    static let sort          = "Sort"
-    static let filter        = "Filter by Mission Status"
+    static let sort          = "Sort:"
+    static let filter        = "Filter:"
     static let missionName   = "Mission Name"
     static let launchDate    = "Launch Date"
     static let filterButton  = "Select Filter"
-    static let applyButton   = "Apply to Launch List"
+    static let applyButton   = "Apply Changes"
 }
 
 enum Caption {
@@ -51,6 +51,13 @@ enum StatusDescription {
     static let successDet = "Successful mission launch"
     static let failureDet = "Mission launch failed"
     static let nullDet    = "Upcoming mission. Details can't be determined at this time"
+}
+
+enum MissionStatus: String {
+    case all = "All Mission launches"
+    case success = "Successful Missions"
+    case fail = "Failed Missions"
+    case null = "Upcoming Missions"
 }
 
 /// Constant values to be used for animations

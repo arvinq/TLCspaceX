@@ -49,18 +49,31 @@ class FilterSortViewController: UIViewController {
         return tableView
     }()
     
-    lazy var filterButton: TLCButton = {
-        let button = TLCButton(title: Title.filterButton, backgroundColor: .systemGray)
+    lazy var overlayView: UIView = {
+        let view = UIView(frame: view.bounds)
+        view.backgroundColor = .clear
+        view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
+    lazy var filterButton: UIButton = {
+        let button = UIButton()
+        button.setTitleColor(UIColor.label, for: .normal)
+        button.setTitle(Title.filterButton, for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 14.0, weight: .medium)
+        button.layer.borderColor = UIColor.label.cgColor
+        button.layer.borderWidth = CGFloat(2.0)
+        button.layer.cornerRadius = Space.cornerRadius
         button.addTarget(self, action: #selector(filterButtonPressed), for: .touchUpInside)
+        button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
     
     lazy var selectedFilterButton: UIButton = { return UIButton() }()
     
-    lazy var separatorView: TLCSeparatorView = {
-        let separatorView = TLCSeparatorView()
-        return separatorView
-    }()
+    lazy var startSeparatorView: TLCSeparatorView = { return TLCSeparatorView() }()
+    lazy var midSeparatorView: TLCSeparatorView = { return TLCSeparatorView() }()
+    lazy var endSeparatorView: TLCSeparatorView = { return TLCSeparatorView() }()
     
     lazy var closeBarButtonItem: UIBarButtonItem = {
         let barButtonItem = UIBarButtonItem(image: SFSymbol.close, style: .done, target: self, action: #selector(closePressed))
@@ -75,7 +88,7 @@ class FilterSortViewController: UIViewController {
     
     var viewModelManager: ViewModelManager?
     
-    var filterOptionsDatasource: [String] = ["All launch", "Success", "Failure", "No status"]
+    var filterOptionsDatasource: [MissionStatus] = [.all, .success, .fail, .null]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -101,40 +114,55 @@ class FilterSortViewController: UIViewController {
         view.addSubview(filterLabel)
         view.addSubview(filterButton)
         
-        view.addSubview(separatorView)
+        view.addSubview(startSeparatorView)
+        view.addSubview(midSeparatorView)
+        view.addSubview(endSeparatorView)
         view.addSubview(applyButton)
     }
     
     private func setupConstraints() {
         NSLayoutConstraint.activate([
+            
+            //first separator view
+            startSeparatorView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
+            startSeparatorView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            startSeparatorView.heightAnchor.constraint(equalToConstant: Size.separatorHeight),
+            startSeparatorView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            
             sortLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Space.margin),
-            sortLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: Space.adjacent),
+            sortLabel.topAnchor.constraint(equalTo: startSeparatorView.bottomAnchor, constant: Space.adjacent),
             
             sortStackView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.85),
             sortStackView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.1),
             sortStackView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             sortStackView.topAnchor.constraint(equalTo: sortLabel.bottomAnchor, constant: Space.adjacent),
             
-            //first separator view
-            separatorView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
-            separatorView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            separatorView.heightAnchor.constraint(equalToConstant: Size.separatorHeight),
-            separatorView.topAnchor.constraint(equalTo: sortStackView.bottomAnchor, constant: Space.adjacent),
+            //mid separator view
+            midSeparatorView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
+            midSeparatorView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            midSeparatorView.heightAnchor.constraint(equalToConstant: Size.separatorHeight),
+            midSeparatorView.topAnchor.constraint(equalTo: sortStackView.bottomAnchor, constant: Space.adjacent),
             
             //filter caption
             filterLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Space.margin),
             filterLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            filterLabel.topAnchor.constraint(equalTo: separatorView.bottomAnchor, constant: Space.adjacent),
+            filterLabel.topAnchor.constraint(equalTo: midSeparatorView.bottomAnchor, constant: Space.adjacent),
             
-            filterButton.topAnchor.constraint(equalTo: filterLabel.bottomAnchor, constant: Space.adjacent),
+            filterButton.topAnchor.constraint(equalTo: midSeparatorView.bottomAnchor, constant: Space.adjacent),
             filterButton.heightAnchor.constraint(equalToConstant: Size.buttonHeight),
             filterButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             filterButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5),
             
+            //end separator view
+            endSeparatorView.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.9),
+            endSeparatorView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            endSeparatorView.heightAnchor.constraint(equalToConstant: Size.separatorHeight),
+            endSeparatorView.topAnchor.constraint(equalTo: filterButton.bottomAnchor, constant: Space.adjacent),
+            
             applyButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             applyButton.heightAnchor.constraint(equalToConstant: Size.buttonHeight),
             applyButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.5),
-            applyButton.topAnchor.constraint(equalTo: filterButton.bottomAnchor, constant: Space.adjacent * 5)
+            applyButton.topAnchor.constraint(equalTo: endSeparatorView.bottomAnchor, constant: Space.adjacent * 2)
         ])
     }
     
@@ -149,6 +177,9 @@ class FilterSortViewController: UIViewController {
         let launchDateGesture = SorterTapGestureRecognizer(target: self, action: #selector(sorterLabelTapped(_:)))
         launchDateGesture.sortDescriptor = .launchDate
         launchDateLabel.addGestureRecognizer(launchDateGesture)
+        
+        let hideFilterGesture = UITapGestureRecognizer(target: self, action: #selector(hideFilterTableView))
+        overlayView.addGestureRecognizer(hideFilterGesture)
     }
     
     @objc
@@ -187,7 +218,9 @@ class FilterSortViewController: UIViewController {
         
         // setup and reload
         filterTableView.frame = CGRect(x: buttonFrame.origin.x, y: buttonFrame.origin.y + buttonFrame.height, width: buttonFrame.width, height: 0)
+        self.view.addSubview(overlayView)
         self.view.addSubview(filterTableView)
+        
         filterTableView.layer.cornerRadius = Space.cornerRadius
         filterTableView.reloadData()
         
@@ -197,8 +230,10 @@ class FilterSortViewController: UIViewController {
         }
     }
     
+    @objc
     private func hideFilterTableView() {
         let buttonFrame = filterButton.frame
+        self.overlayView.removeFromSuperview()
         
         UIView.animate(withDuration: Animation.duration) {
             self.filterTableView.frame = CGRect(x: buttonFrame.origin.x, y: buttonFrame.origin.y + buttonFrame.height, width: buttonFrame.width, height: 0)
@@ -214,13 +249,13 @@ extension FilterSortViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: OptionTableViewCell.reuseId, for: indexPath) as! OptionTableViewCell
-        cell.optionLabel.text = filterOptionsDatasource[indexPath.row]
+        cell.optionLabel.text = filterOptionsDatasource[indexPath.row].rawValue
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedFilter = self.filterOptionsDatasource[indexPath.row]
-        filterButton.setTitle(selectedFilter, for: .normal)
+        filterButton.setTitle(selectedFilter.rawValue, for: .normal)
         hideFilterTableView()
         viewModelManager?.setFilteredLaunchList(for: selectedFilter)
     }

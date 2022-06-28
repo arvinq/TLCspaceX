@@ -133,19 +133,18 @@ class ViewModelManager {
         }
     }
     
-    func setFilteredLaunchList(for launchStatus: String) {
-        guard launchStatus != "All launch" else {
+    func setFilteredLaunchList(for launchStatus: MissionStatus) {
+        var compareStatus: Bool?
+        
+        switch launchStatus {
+        case .all:
             setInitialFilteredLaunches()
             return
-        }
-        
-        // TODO: We can refactor this in the future where we'll have an enumerated type for launch status
-        var compareStatus: Bool?
-        if launchStatus == "Success" {
+        case .success:
             compareStatus = true
-        } else if launchStatus == "Failure" {
+        case .fail:
             compareStatus = false
-        } else if launchStatus == "No status" {
+        case .null:
             compareStatus = nil
         }
         

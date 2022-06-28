@@ -12,6 +12,7 @@ class OptionTableViewCell: UITableViewCell {
     
     lazy var optionLabel: UILabel = {
         let label = UILabel()
+        label.font = UIFont.systemFont(ofSize: 14.0, weight: .medium)
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()

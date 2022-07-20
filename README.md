@@ -39,3 +39,8 @@ Project is under the MIT License. Please see the [LICENSE](https://github.com/ar
 
 ## Attribution
 [Space icons](https://www.flaticon.com/free-icons/space) that I used for the app's icon is created by amonrat rungreangfangsai from Flaticon.
+
+## Continuation
+Implement Compositional Layout
+www.raywenderlich.com/21959913-uicollectionview-tutorial-headers-selection-and-reordering#toc-anchor-010
+

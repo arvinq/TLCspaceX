@@ -41,11 +41,7 @@ Project is under the MIT License. Please see the [LICENSE](https://github.com/ar
 [Space icons](https://www.flaticon.com/free-icons/space) that I used for the app's icon is created by amonrat rungreangfangsai from Flaticon.
 
 ## Continuation
-Implement Compositional Layout
+Implement Compositional Layout - See Bookmarks
 
-www.raywenderlich.com/21959913-uicollectionview-tutorial-headers-selection-and-reordering
-www.raywenderlich.com/8241072-ios-tutorial-collection-view-and-diffable-data-source
-www.youtube.com/watch?v=SR7DtcT61tA
-github.com/twostraws/TapStore/blob/main/TapStore/AppsViewController.swift
 
 
